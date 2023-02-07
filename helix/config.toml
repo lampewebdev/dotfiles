@@ -1,0 +1,13 @@
+
+theme = "tokyonight"
+
+[editor]
+line-number = "relative"
+mouse = false
+rulers = [80]
+bufferline = "always"
+
+[keys.normal]
+
+[editor.cursor-shape]
+insert = "bar"

@@ -1,0 +1,16 @@
+mattmc3/zephyr path:plugins/directory
+mattmc3/zephyr path:plugins/environment
+mattmc3/zephyr path:plugins/editor
+mattmc3/zephyr path:plugins/history
+mattmc3/zephyr path:plugins/utility
+mattmc3/zephyr path:plugins/prompt
+
+ohmyzsh/ohmyzsh path:plugins/history-substring-search
+
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+
+#zsh-users/zsh-history-substring-search
+#mattmc3/zephyr path:plugins/clipboard
+#mattmc3/zephyr path:plugins/history-substring-search
+#mattmc3/zephyr path:plugins/autosuggestions
