@@ -4,7 +4,7 @@ theme = "tokyonight"
 [editor]
 line-number = "relative"
 mouse = false
-rulers = [80]
+rulers = [100]
 bufferline = "always"
 
 [keys.normal]
