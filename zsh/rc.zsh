@@ -17,7 +17,7 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/Users/lampe/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
