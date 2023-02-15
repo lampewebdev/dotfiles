@@ -5,14 +5,7 @@ mattmc3/zephyr path:plugins/history
 mattmc3/zephyr path:plugins/utility
 mattmc3/zephyr path:plugins/prompt
 mattmc3/zephyr path:plugins/macos
-mattmc3/zephyr path:plugins/completion
-
-ohmyzsh/ohmyzsh path:plugins/history-substring-search
 
 zsh-users/zsh-autosuggestions
-zsh-users/zsh-completions
+zsh-users/zsh-history-substring-search
 
-#zsh-users/zsh-history-substring-search
-#mattmc3/zephyr path:plugins/clipboard
-#mattmc3/zephyr path:plugins/history-substring-search
-#mattmc3/zephyr path:plugins/autosuggestions
