@@ -13,6 +13,8 @@ source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 # Tell Antigen that you're done.
 antidote load
 
+export HOMEBREW_NO_ANALYTICS=1
+
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
