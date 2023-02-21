@@ -18,6 +18,11 @@ export HOMEBREW_NO_ANALYTICS=1
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
+#history up
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+#history down
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
