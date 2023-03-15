@@ -1,10 +1,6 @@
-font_family Jetbrains Mono Nerf Font
-#font_family Fira Code Nerd Font
-#font_family Hack Nerf Font
-#font_family	VictorMono Nerd Font
-#font_family	Gintronic
+font_family	Gintronic
 #font_family 	Iosevka Term SS17
-font_size 	20
+font_size 	18
 hide_window_decorations titlebar-only
 <<<<<<< HEAD
 macos_option_as_alt yes 
@@ -12,6 +8,6 @@ macos_option_as_alt yes
 macos_option_as_alt yes
 >>>>>>> 79dc5c286cd34ccfcbb8017861e603ccdd531bf5
 # BEGIN_KITTY_THEME
-# Tokyo Night
+# Rosé Pine
 include current-theme.conf
 # END_KITTY_THEME
