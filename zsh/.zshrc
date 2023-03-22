@@ -6,7 +6,7 @@ source_if_exists () {
 }
 
 source_if_exists $HOME/.env.sh
-source_if_exists $DOTFILES/zsh/aliases.zsh
+source_if_exists $HOME/.aliases.zsh
 
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
 
