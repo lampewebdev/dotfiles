@@ -27,7 +27,11 @@ lsp.format_on_save({
         ['rust_analyzer'] = { 'rust' },
     }
 })
+local util = require('lspconfig.util')
 
+lsp.configure('angularls', {
+    root_dir = util.root_pattern('angular.json', 'package.json')
+})
 lsp.setup()
 
 vim.diagnostic.config()
