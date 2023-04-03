@@ -16,7 +16,17 @@ local plugins = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
     'folke/tokyonight.nvim',
+    {
+        "catppuccin/nvim",
+        name = "catppuccin"
+    },
+    {
+        'rose-pine/neovim',
+        name = 'rose-pine'
+    },
+    "rebelot/kanagawa.nvim",
     'lewis6991/gitsigns.nvim',
+    "EdenEast/nightfox.nvim",
     'goolord/alpha-nvim',
     'nvim-lualine/lualine.nvim',
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
@@ -25,21 +35,27 @@ local plugins = {
         branch = 'v2.x',
         dependencies = {
             -- LSP Support
-            { 'neovim/nvim-lspconfig' },             -- Required
-            { 'williamboman/mason.nvim' },           -- Optional
+            { 'neovim/nvim-lspconfig' }, -- Required
+            {
+                -- Optional
+                'williamboman/mason.nvim',
+                build = function()
+                    pcall(vim.cmd, 'MasonUpdate')
+                end,
+            },
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },         -- Required
-            { 'hrsh7th/cmp-nvim-lsp' },     -- Required
+            { 'hrsh7th/nvim-cmp' },     -- Required
+            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
 
-            { 'hrsh7th/cmp-path' },         -- Optional
-            { 'saadparwaiz1/cmp_luasnip' }, -- Optional
-            { 'hrsh7th/cmp-nvim-lua' },     -- Optional
+            { 'hrsh7th/cmp-path' },     -- Optional
+            -- { 'saadparwaiz1/cmp_luasnip' }, -- Optional
+            -- { 'hrsh7th/cmp-nvim-lua' },     -- Optional
 
             -- Snippets
-            { 'L3MON4D3/LuaSnip' },             -- Required
-            { 'rafamadriz/friendly-snippets' }, -- Optional
+            { 'L3MON4D3/LuaSnip' }, -- Required
+            -- { 'rafamadriz/friendly-snippets' }, -- Optional
         }
     },
     {

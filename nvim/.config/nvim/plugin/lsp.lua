@@ -3,6 +3,7 @@ local lsp = require('lsp-zero').preset({})
 lsp.on_attach(function(client, bufnr)
     lsp.default_keymaps({ buffer = bufnr })
 end)
+
 lsp.ensure_installed({
     -- Replace these with whatever servers you want to install
     'tsserver',
@@ -61,6 +62,10 @@ vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition, opts)
 
 local cmp = require('cmp')
 cmp.setup({
+    preselect = 'item',
+    completion = {
+        completeopt = 'menu,menuone,noinsert'
+    },
     mapping = cmp.mapping.preset.insert({
         ['<C-h>'] = cmp.mapping.confirm({ select = true }),
         ['<C-k>'] = cmp.mapping.select_next_item(),
