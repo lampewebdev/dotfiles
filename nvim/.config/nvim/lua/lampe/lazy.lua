@@ -71,13 +71,29 @@ local plugins = {
         end,
     },
     'sindrets/diffview.nvim',
-    -- 'nvim-tree/nvim-tree.lua',
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v2.x",
-    },
+    'nvim-tree/nvim-tree.lua',
+    -- {
+    --     "nvim-neo-tree/neo-tree.nvim",
+    --     branch = "v2.x",
+    -- },
     "MunifTanjim/nui.nvim",
     'numToStr/Comment.nvim',
+    {
+        "folke/persistence.nvim",
+        event = "BufReadPre", -- this will only start session saving when an actual file was opened
+        module = "persistence",
+        config = function()
+            require("persistence").setup()
+        end,
+    },
+    {
+        'phaazon/hop.nvim',
+        branch = 'v2', -- optional but strongly recommended
+        config = function()
+            -- you can configure Hop the way you like here; see :h hop-config
+            require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+        end
+    },
 }
 local opts = {}
 
