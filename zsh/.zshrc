@@ -43,3 +43,5 @@ PERL_MB_OPT="--install_base \"/Users/lampe/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/lampe/perl5"; export PERL_MM_OPT;
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source /Users/mlape6/.config/broot/launcher/bash/br

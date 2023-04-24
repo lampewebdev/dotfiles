@@ -48,8 +48,10 @@ local plugins = {
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },     -- Required
             { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-
-            { 'hrsh7th/cmp-path' },     -- Optional
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+            { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
+            { 'hrsh7th/cmp-path' }, -- Optional
             -- { 'saadparwaiz1/cmp_luasnip' }, -- Optional
             -- { 'hrsh7th/cmp-nvim-lua' },     -- Optional
 

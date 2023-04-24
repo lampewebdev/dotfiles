@@ -62,15 +62,23 @@ vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition, opts)
 
 local cmp = require('cmp')
 cmp.setup({
+    sources = {
+        { name = 'path' },
+        { name = 'nvim_lsp' },
+        { name = 'buffer',                  keyword_length = 3 },
+        { name = 'luasnip',                 keyword_length = 2 },
+        { name = 'nvim_lsp_signature_help' },
+        { name = 'nvim_lsp_document_symbol' },
+    },
     preselect = 'item',
     completion = {
         completeopt = 'menu,menuone,noinsert'
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-h>'] = cmp.mapping.confirm({ select = true }),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ['<C-k>'] = cmp.mapping.select_next_item(),
         ['<C-j>'] = cmp.mapping.select_prev_item(),
         ['<C-l>'] = cmp.mapping.abort(),
-        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-CR>'] = cmp.mapping.complete(),
     }),
 })
