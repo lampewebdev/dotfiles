@@ -33,6 +33,8 @@ local util = require('lspconfig.util')
 lsp.configure('angularls', {
     root_dir = util.root_pattern('angular.json', 'package.json')
 })
+
+
 lsp.setup()
 
 vim.diagnostic.config()
@@ -41,14 +43,15 @@ opts.desc = "go to prev lsp"
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', '<leader>lp', vim.diagnostic.goto_prev, opts)
 opts.desc = "go to next lsp"
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<leader>r', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<leader>ln', vim.diagnostic.goto_next, opts)
 opts.desc = "format file lsp"
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, opts)
+vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, opts)
 opts.desc = "jump to implementation lsp"
 vim.keymap.set('n', '<leader>li', vim.lsp.buf.implementation, opts)
 opts.desc = "Show Code Actions"
-vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts)
+vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
 opts.desc = "Show Code Actions"
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.references, opts)
 opts.desc = "Open Info Float"
@@ -59,20 +62,35 @@ opts.desc = "Definition"
 vim.keymap.set('n', '<leader>ld', vim.lsp.buf.definition, opts)
 opts.desc = "Type Definition"
 vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition, opts)
+opts.desc = "Hover: show desc"
+vim.keymap.set('n', '<leader>d', vim.lsp.buf.hover, opts)
+opts.desc = "signature"
+vim.keymap.set('n', '<leader>n', vim.lsp.buf.signature_help, opts)
 
 local cmp = require('cmp')
+
 cmp.setup({
-    sources = {
+    sources = cmp.config.sources({
         { name = 'path' },
         { name = 'nvim_lsp' },
+        { name = 'vsnip' },
         { name = 'buffer',                  keyword_length = 3 },
-        { name = 'luasnip',                 keyword_length = 2 },
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lsp_document_symbol' },
+    }, {
+        { name = 'buffer' },
+    }),
+    snippet = {
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+        end,
     },
     preselect = 'item',
     completion = {
         completeopt = 'menu,menuone,noinsert'
+    },
+    experimental = {
+        ghost_text = true,
     },
     mapping = cmp.mapping.preset.insert({
         ['<CR>'] = cmp.mapping.confirm({ select = true }),

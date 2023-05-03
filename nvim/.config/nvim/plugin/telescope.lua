@@ -10,7 +10,7 @@ telescope.setup({
             width = vim.o.columns,
             horizontal = {
                 prompt_position = "bottom",
-                preview_width = 0.6,
+                preview_width = 0.7,
                 -- results_width = 0.8,
             },
             vertical = {

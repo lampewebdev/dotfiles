@@ -24,6 +24,7 @@ local plugins = {
         'rose-pine/neovim',
         name = 'rose-pine'
     },
+    'gerazov/toggle-bool.nvim',
     "rebelot/kanagawa.nvim",
     'lewis6991/gitsigns.nvim',
     "EdenEast/nightfox.nvim",
@@ -46,25 +47,27 @@ local plugins = {
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },     -- Required
+            {
+                'hrsh7th/nvim-cmp',
+                dependencies = {
+                    "rafamadriz/friendly-snippets",
+                    "hrsh7th/vim-vsnip",
+                    "hrsh7th/vim-vsnip",
+                    "hrsh7th/cmp-vsnip"
+                }
+            },                          -- Required
             { 'hrsh7th/cmp-nvim-lsp' }, -- Required
             { 'hrsh7th/cmp-buffer' },
             { 'hrsh7th/cmp-nvim-lsp-signature-help' },
             { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
             { 'hrsh7th/cmp-path' }, -- Optional
-            -- { 'saadparwaiz1/cmp_luasnip' }, -- Optional
-            -- { 'hrsh7th/cmp-nvim-lua' },     -- Optional
-
-            -- Snippets
-            { 'L3MON4D3/LuaSnip' }, -- Required
-            -- { 'rafamadriz/friendly-snippets' }, -- Optional
         }
     },
     {
         "folke/which-key.nvim",
         config = function()
             vim.o.timeout = true
-            vim.o.timeoutlen = 300
+            vim.o.timeoutlen = 50
             require("which-key").setup({
                 -- your configuration comes here
                 -- or leave it empty to use the default settings
@@ -72,7 +75,7 @@ local plugins = {
             })
         end,
     },
-    'sindrets/diffview.nvim',
+    -- 'sindrets/diffview.nvim',
     'nvim-tree/nvim-tree.lua',
     -- {
     --     "nvim-neo-tree/neo-tree.nvim",
@@ -91,10 +94,6 @@ local plugins = {
     {
         'phaazon/hop.nvim',
         branch = 'v2', -- optional but strongly recommended
-        config = function()
-            -- you can configure Hop the way you like here; see :h hop-config
-            require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-        end
     },
 }
 local opts = {}
