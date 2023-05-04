@@ -75,7 +75,7 @@ local plugins = {
             })
         end,
     },
-    -- 'sindrets/diffview.nvim',
+    'sindrets/diffview.nvim',
     'nvim-tree/nvim-tree.lua',
     -- {
     --     "nvim-neo-tree/neo-tree.nvim",
