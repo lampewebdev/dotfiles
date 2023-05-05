@@ -1,3 +1,7 @@
+require("neoconf").setup({
+    -- override any of the default settings here
+})
+
 local lsp = require('lsp-zero').preset({})
 
 lsp.on_attach(function(client, bufnr)
@@ -9,7 +13,8 @@ lsp.ensure_installed({
     'tsserver',
     'eslint',
     'rust_analyzer',
-    'prosemd_lsp'
+    'prosemd_lsp',
+    'jsonls'
 })
 
 -- (Optional) Configure lua language server for neovim

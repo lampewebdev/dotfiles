@@ -15,6 +15,9 @@ local plugins = {
     'nvim-telescope/telescope.nvim',
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
+    "folke/neodev.nvim",
+    "folke/neoconf.nvim",
+    "Mofiqul/dracula.nvim",
     'folke/tokyonight.nvim',
     {
         "catppuccin/nvim",
