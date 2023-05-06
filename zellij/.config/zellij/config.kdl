@@ -5,4 +5,4 @@ plugins {
 }
 
 // Choose the theme that is specified in the themes section.
-theme "dracula"
+theme "rosePine"

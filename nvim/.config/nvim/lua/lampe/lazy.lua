@@ -16,6 +16,7 @@ local plugins = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
     "folke/neodev.nvim",
+    'brenoprata10/nvim-highlight-colors',
     "folke/neoconf.nvim",
     "Mofiqul/dracula.nvim",
     'folke/tokyonight.nvim',
