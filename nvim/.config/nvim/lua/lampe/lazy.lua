@@ -15,6 +15,7 @@ local plugins = {
     'nvim-telescope/telescope.nvim',
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
+    'tpope/vim-fugitive',
     "folke/neodev.nvim",
     'brenoprata10/nvim-highlight-colors',
     "folke/neoconf.nvim",
