@@ -3,7 +3,16 @@ require("neoconf").setup({
 })
 
 local lsp = require('lsp-zero').preset({})
-
+require("mason").setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    },
+    log_level = vim.log.levels.DEBUG
+})
 lsp.on_attach(function(client, bufnr)
     lsp.default_keymaps({ buffer = bufnr })
 end)

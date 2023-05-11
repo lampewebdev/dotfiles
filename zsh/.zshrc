@@ -30,7 +30,10 @@ export PATH="$PNPM_HOME:$PATH"
 
 # zoxide
 eval "$(zoxide init zsh)"
-
+unalias z
+function z () {
+    __zoxide_z "$@"
+}
 # Load Angular CLI autocompletion.
 autoload -Uz compinit
 compinit
