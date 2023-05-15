@@ -1,5 +1,8 @@
 local builtin = require('telescope.builtin')
 local telescope = require('telescope')
+local actions = require('telescope.actions')
+
+local grep_args = { '--hidden', '--glob', '!**/.git/*' }
 
 telescope.setup({
     defaults = {
@@ -17,12 +20,33 @@ telescope.setup({
                 mirror = false,
             },
         },
+        mappings = {
+            i = {
+                ['<esc>'] = actions.close
+            },
+        },
+    },
+    pickers = {
+        find_files = {
+            find_command = { 'fd', '--type', 'f', '--hidden', '--exclude', '.git' }
+        },
+        live_grep = {
+            additional_args = function(opts)
+                return grep_args
+            end
+        },
+        grep_string = {
+            additional_args = function(opts)
+                return grep_args
+            end
+        },
     },
 })
 
 vim.keymap.set('n', '<leader>tf', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>tg', builtin.git_files, { desc = "Telescope git files" })
-vim.keymap.set('n', '<leader>tl', builtin.live_grep, { desc = "telescope live grep" })
+vim.keymap.set('n', '<leader>tl', builtin.live_grep, { desc = "Telescope live grep" })
+vim.keymap.set('n', '<leader>ts', builtin.grep_string, { desc = "Telescope grep string" })
 vim.keymap.set('n', '<leader>tb', builtin.buffers, { desc = "Telescope buffers" })
 vim.keymap.set('n', '<leader>tc', builtin.commands, { desc = "Telescope commands" })
 vim.keymap.set('n', '<leader>tk', builtin.keymaps, { desc = "Telescope keymaps" })

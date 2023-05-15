@@ -37,11 +37,16 @@ lsp.set_sign_icons({
 })
 
 lsp.format_on_save({
+    format_opts = {
+        async = false,
+        timeout_ms = 10000,
+    },
     servers = {
         ['lua_ls'] = { 'lua' },
         ['rust_analyzer'] = { 'rust' },
     }
 })
+
 local util = require('lspconfig.util')
 
 lsp.configure('angularls', {
