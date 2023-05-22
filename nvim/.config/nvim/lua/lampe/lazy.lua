@@ -29,6 +29,10 @@ local plugins = {
         'rose-pine/neovim',
         name = 'rose-pine'
     },
+
+    "mfussenegger/nvim-dap",
+    "rcarriga/nvim-dap-ui",
+
     'gerazov/toggle-bool.nvim',
     "rebelot/kanagawa.nvim",
     'lewis6991/gitsigns.nvim',
@@ -43,7 +47,7 @@ local plugins = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' }, -- Required
             {
-            --     -- Optional
+                --     -- Optional
                 'williamboman/mason.nvim',
                 build = ":MasonUpdate"
             },
@@ -66,6 +70,8 @@ local plugins = {
             { 'hrsh7th/cmp-path' }, -- Optional
         }
     },
+    'simrat39/rust-tools.nvim',
+    "aznhe21/actions-preview.nvim",
     {
         "folke/which-key.nvim",
         config = function()

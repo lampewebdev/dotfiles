@@ -18,16 +18,43 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.ensure_installed({
-    -- Replace these with whatever servers you want to install
+    -- Replace these with whatever servers you want t
     'tsserver',
     'eslint',
     'rust_analyzer',
     'prosemd_lsp',
     'jsonls'
 })
+lsp.skip_server_setup({ 'rust_analyzer' });
 
 -- (Optional) Configure lua language server for neovim
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+
+local rt = require("rust-tools")
+local mason_registry = require("mason-registry")
+
+local codelldb = mason_registry.get_package("codelldb")
+local extension_path = codelldb:get_install_path() .. "/extension/"
+local codelldb_path = extension_path .. "adapter/codelldb"
+local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+
+rt.setup({
+    dap = {
+        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+    },
+    server = {
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        on_attach = function(_, bufnr)
+            vim.keymap.set("n", "<Leader>k", rt.hover_actions.hover_actions, { buffer = bufnr })
+            vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+        end,
+    },
+    tools = {
+        hover_actions = {
+            auto_focus = true,
+        },
+    },
+})
 
 lsp.set_sign_icons({
     error = '✘',
@@ -82,9 +109,10 @@ vim.keymap.set('n', '<leader>ld', vim.lsp.buf.definition, opts)
 opts.desc = "Type Definition"
 vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition, opts)
 opts.desc = "Hover: show desc"
-vim.keymap.set('n', '<leader>d', vim.lsp.buf.hover, opts)
+vim.keymap.set('n', '<leader>DD', vim.lsp.buf.hover, opts)
 opts.desc = "signature"
 vim.keymap.set('n', '<leader>n', vim.lsp.buf.signature_help, opts)
+vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
 
 local cmp = require('cmp')
 

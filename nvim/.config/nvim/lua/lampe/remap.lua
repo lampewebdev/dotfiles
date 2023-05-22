@@ -14,3 +14,4 @@ vim.keymap.set("n", "<leader>i", "<C-i>", { desc = "jump forward" })
 vim.keymap.set("n", "<leader>o", "<C-o>", { desc = "jump backward" })
 vim.keymap.set("n", "<leader>y", ":lua require('toggle-bool').toggle_bool()<cr>", { desc = "toggle" })
 vim.keymap.set("i", "<c-e>", "<c-o>", { desc = "special insert mode" })
+
