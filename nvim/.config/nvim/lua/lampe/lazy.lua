@@ -20,6 +20,7 @@ local plugins = {
     'brenoprata10/nvim-highlight-colors',
     "folke/neoconf.nvim",
     "Mofiqul/dracula.nvim",
+    "oxfist/night-owl.nvim",
     'folke/tokyonight.nvim',
     {
         "catppuccin/nvim",
