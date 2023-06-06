@@ -126,11 +126,11 @@ local cmp = require('cmp')
 cmp.setup({
     sources = cmp.config.sources({
         { name = 'path' },
-        { name = 'nvim_lsp' },
         { name = 'vsnip' },
         { name = 'buffer',                  keyword_length = 3 },
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lsp_document_symbol' },
+        { name = 'nvim_lsp' },
     }, {
         { name = 'buffer' },
     }),
@@ -154,3 +154,6 @@ cmp.setup({
         ['<C-CR>'] = cmp.mapping.complete(),
     }),
 })
+
+vim.ui.select = require "popui.ui-overrider"
+vim.ui.input = require "popui.input-overrider"

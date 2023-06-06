@@ -59,12 +59,14 @@ local plugins = {
                 'hrsh7th/nvim-cmp',
                 dependencies = {
                     "rafamadriz/friendly-snippets",
+                    { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+
                     "hrsh7th/vim-vsnip",
                     "hrsh7th/vim-vsnip",
                     "hrsh7th/cmp-vsnip"
                 }
-            },                          -- Required
-            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+            }, -- Required
+
             { 'hrsh7th/cmp-buffer' },
             { 'hrsh7th/cmp-nvim-lsp-signature-help' },
             { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
@@ -73,16 +75,13 @@ local plugins = {
     },
     'simrat39/rust-tools.nvim',
     "aznhe21/actions-preview.nvim",
+    'hood/popui.nvim',
     {
         "folke/which-key.nvim",
         config = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 50
-            require("which-key").setup({
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            })
+            require("which-key").setup({})
         end,
     },
     'sindrets/diffview.nvim',
@@ -104,7 +103,7 @@ local plugins = {
     {
         'phaazon/hop.nvim',
         branch = 'v2', -- optional but strongly recommended
-    },
+    }
 }
 local opts = {}
 

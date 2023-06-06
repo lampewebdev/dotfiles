@@ -14,6 +14,6 @@ macos_option_as_alt yes
 tab_bar_edge top
 
 # BEGIN_KITTY_THEME
-# Rosé Pine Moon
+# kanagawabones
 include current-theme.conf
 # END_KITTY_THEME
