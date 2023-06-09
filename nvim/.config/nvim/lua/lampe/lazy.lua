@@ -1,11 +1,11 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable', -- latest stable release
         lazypath,
     })
 end
@@ -16,95 +16,86 @@ local plugins = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
     'tpope/vim-fugitive',
-    "folke/neodev.nvim",
+    'folke/neodev.nvim',
     'brenoprata10/nvim-highlight-colors',
-    "folke/neoconf.nvim",
-    "Mofiqul/dracula.nvim",
-    "oxfist/night-owl.nvim",
+    'folke/neoconf.nvim',
+    'Mofiqul/dracula.nvim',
+    'oxfist/night-owl.nvim',
     'folke/tokyonight.nvim',
     {
-        "catppuccin/nvim",
-        name = "catppuccin"
+        'catppuccin/nvim',
+        name = 'catppuccin',
+        priority = 1000
     },
     {
         'rose-pine/neovim',
         name = 'rose-pine'
     },
 
-    "mfussenegger/nvim-dap",
-    "rcarriga/nvim-dap-ui",
+    'mfussenegger/nvim-dap',
+    'rcarriga/nvim-dap-ui',
 
     'gerazov/toggle-bool.nvim',
-    "rebelot/kanagawa.nvim",
+    'rebelot/kanagawa.nvim',
     'lewis6991/gitsigns.nvim',
-    "EdenEast/nightfox.nvim",
+    'EdenEast/nightfox.nvim',
     'goolord/alpha-nvim',
     'nvim-lualine/lualine.nvim',
-    { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+    { 'nvim-treesitter/nvim-treesitter', build = ":TSUpdate" },
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',
         dependencies = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' }, -- Required
+            { 'neovim/nvim-lspconfig' },
             {
-                --     -- Optional
                 'williamboman/mason.nvim',
-                build = ":MasonUpdate"
+                build = ':MasonUpdate'
             },
-            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
-
-            -- Autocompletion
+            { 'williamboman/mason-lspconfig.nvim' },
             {
                 'hrsh7th/nvim-cmp',
                 dependencies = {
-                    "rafamadriz/friendly-snippets",
-                    { 'hrsh7th/cmp-nvim-lsp' }, -- Required
-
-                    "hrsh7th/vim-vsnip",
-                    "hrsh7th/vim-vsnip",
-                    "hrsh7th/cmp-vsnip"
+                    'rafamadriz/friendly-snippets',
+                    'hrsh7th/cmp-nvim-lsp',
+                    'hrsh7th/vim-vsnip',
+                    'hrsh7th/vim-vsnip',
+                    'hrsh7th/cmp-vsnip'
                 }
-            }, -- Required
-
+            },
             { 'hrsh7th/cmp-buffer' },
             { 'hrsh7th/cmp-nvim-lsp-signature-help' },
             { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
-            { 'hrsh7th/cmp-path' }, -- Optional
+            { 'hrsh7th/cmp-path' },
         }
     },
     'simrat39/rust-tools.nvim',
-    "aznhe21/actions-preview.nvim",
+    'aznhe21/actions-preview.nvim',
     'hood/popui.nvim',
     {
-        "folke/which-key.nvim",
+        'folke/which-key.nvim',
         config = function()
             vim.o.timeout = true
             vim.o.timeoutlen = 50
-            require("which-key").setup({})
+            require('which-key').setup({})
         end,
     },
     'sindrets/diffview.nvim',
     'nvim-tree/nvim-tree.lua',
-    -- {
-    --     "nvim-neo-tree/neo-tree.nvim",
-    --     branch = "v2.x",
-    -- },
-    "MunifTanjim/nui.nvim",
+    'MunifTanjim/nui.nvim',
     'numToStr/Comment.nvim',
     {
-        "folke/persistence.nvim",
-        event = "BufReadPre", -- this will only start session saving when an actual file was opened
-        module = "persistence",
+        'folke/persistence.nvim',
+        event = 'BufReadPre', -- this will only start session saving when an actual file was opened
+        module = 'persistence',
         config = function()
-            require("persistence").setup()
+            require('persistence').setup()
         end,
     },
     {
         'phaazon/hop.nvim',
-        branch = 'v2', -- optional but strongly recommended
+        branch = 'v2',
     }
 }
 local opts = {}
 
-require("lazy").setup(plugins, opts)
+require('lazy').setup(plugins, opts)
