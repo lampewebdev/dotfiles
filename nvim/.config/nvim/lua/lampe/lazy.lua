@@ -20,7 +20,11 @@ local plugins = {
     'brenoprata10/nvim-highlight-colors',
     'folke/neoconf.nvim',
     'Mofiqul/dracula.nvim',
-    'oxfist/night-owl.nvim',
+    -- {
+    --     'oxfist/night-owl.nvim',
+    --     name = 'night-owl',
+    --     priority = 1000,
+    -- },
     'folke/tokyonight.nvim',
     {
         'catppuccin/nvim',
@@ -29,14 +33,13 @@ local plugins = {
     },
     {
         'rose-pine/neovim',
-        name = 'rose-pine'
+        name = 'rose-pine',
+        priority = 1000,
     },
-
+    'rebelot/kanagawa.nvim',
     'mfussenegger/nvim-dap',
     'rcarriga/nvim-dap-ui',
-
     'gerazov/toggle-bool.nvim',
-    'rebelot/kanagawa.nvim',
     'lewis6991/gitsigns.nvim',
     'EdenEast/nightfox.nvim',
     'goolord/alpha-nvim',

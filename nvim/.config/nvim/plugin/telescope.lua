@@ -31,12 +31,12 @@ telescope.setup({
             find_command = { 'fd', '--type', 'f', '--hidden', '--exclude', '.git' }
         },
         live_grep = {
-            additional_args = function(opts)
+            additional_args = function()
                 return grep_args
             end
         },
         grep_string = {
-            additional_args = function(opts)
+            additional_args = function()
                 return grep_args
             end
         },
