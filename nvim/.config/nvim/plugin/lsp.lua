@@ -105,7 +105,7 @@ opts.desc = "jump to implementation lsp"
 vim.keymap.set('n', '<leader>li', vim.lsp.buf.implementation, opts)
 opts.desc = "Show Code Actions"
 vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
-opts.desc = "Show Code Actions"
+opts.desc = "Show References"
 vim.keymap.set('n', '<leader>lr', vim.lsp.buf.references, opts)
 opts.desc = "Open Info Float"
 vim.keymap.set('n', '<leader>lo', vim.diagnostic.open_float, opts)

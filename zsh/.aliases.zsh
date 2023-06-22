@@ -6,7 +6,10 @@ alias v='nvim'
 alias ze='zellij'
 alias zea='zellij a'
 alias zel='zellij ls'
+alias zes='zellij -s'
 alias stowh="stow --target $HOME"
+
+# alias zig="/Users/mlape6/code/learning/zig/zig/build/stage3/bin/zig"
 
 alias gaa='git add --all'
 alias ggl='git pull origin'
