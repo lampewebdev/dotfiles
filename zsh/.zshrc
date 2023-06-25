@@ -9,7 +9,6 @@ source_if_exists $HOME/.env.sh
 source_if_exists $HOME/.aliases.zsh
 
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
-
 # Tell Antigen that you're done.
 antidote load
 
@@ -36,6 +35,7 @@ unalias z
 function z () {
     __zoxide_z "$@"
 }
+
 # Load Angular CLI autocompletion.
 autoload -Uz compinit
 compinit
