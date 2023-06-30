@@ -53,3 +53,4 @@ PERL_MM_OPT="INSTALL_BASE=/Users/lampe/perl5"; export PERL_MM_OPT;
 source ~/.config/broot/launcher/bash/br
 
 BAT_THEME="Catppuccin-mocha"
+eval "$(starship init zsh)"
