@@ -82,8 +82,11 @@ local plugins = {
             require('which-key').setup({})
         end,
     },
+    {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+    },
     'sindrets/diffview.nvim',
-    'nvim-tree/nvim-tree.lua',
     'MunifTanjim/nui.nvim',
     'numToStr/Comment.nvim',
     {
