@@ -11,14 +11,15 @@ telescope.setup({
         layout_config = {
             height = vim.o.lines,
             width = vim.o.columns,
-            horizontal = {
-                prompt_position = "bottom",
-                preview_width = 0.7,
-                -- results_width = 0.8,
-            },
-            vertical = {
-                mirror = false,
-            },
+            -- horizontal = {
+            --     prompt_position = "bottom",
+            --
+            --     -- preview_width = 0.7,
+            --     -- results_width = 0.8,
+            -- },
+            -- vertical = {
+            --     mirror = false,
+            -- },
         },
         mappings = {
             i = {

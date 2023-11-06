@@ -20,11 +20,6 @@ local plugins = {
     'brenoprata10/nvim-highlight-colors',
     'folke/neoconf.nvim',
     'Mofiqul/dracula.nvim',
-    -- {
-    --     'oxfist/night-owl.nvim',
-    --     name = 'night-owl',
-    --     priority = 1000,
-    -- },
     'folke/tokyonight.nvim',
     {
         'catppuccin/nvim',
@@ -44,33 +39,29 @@ local plugins = {
     'EdenEast/nightfox.nvim',
     'goolord/alpha-nvim',
     'nvim-lualine/lualine.nvim',
-    { 'nvim-treesitter/nvim-treesitter', build = ":TSUpdate" },
+    { 'nvim-treesitter/nvim-treesitter',  build = ":TSUpdate" },
+    { 'williamboman/mason.nvim' },
+    { 'williamboman/mason-lspconfig.nvim' },
+
+    { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
+    { 'neovim/nvim-lspconfig' },
+    { 'hrsh7th/cmp-nvim-lsp' },
+    { 'hrsh7th/nvim-cmp' },
+    { 'L3MON4D3/LuaSnip' },
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
+        'hrsh7th/nvim-cmp',
         dependencies = {
-            { 'neovim/nvim-lspconfig' },
-            {
-                'williamboman/mason.nvim',
-                build = ':MasonUpdate'
-            },
-            { 'williamboman/mason-lspconfig.nvim' },
-            {
-                'hrsh7th/nvim-cmp',
-                dependencies = {
-                    'rafamadriz/friendly-snippets',
-                    'hrsh7th/cmp-nvim-lsp',
-                    'hrsh7th/vim-vsnip',
-                    'hrsh7th/vim-vsnip',
-                    'hrsh7th/cmp-vsnip'
-                }
-            },
-            { 'hrsh7th/cmp-buffer' },
-            { 'hrsh7th/cmp-nvim-lsp-signature-help' },
-            { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
-            { 'hrsh7th/cmp-path' },
+            'rafamadriz/friendly-snippets',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/vim-vsnip',
+            'hrsh7th/vim-vsnip',
+            'hrsh7th/cmp-vsnip'
         }
     },
+    { 'hrsh7th/cmp-buffer' },
+    { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+    { 'hrsh7th/cmp-nvim-lsp-document-symbol' },
+    { 'hrsh7th/cmp-path' },
     'simrat39/rust-tools.nvim',
     'aznhe21/actions-preview.nvim',
     'hood/popui.nvim',
@@ -85,6 +76,12 @@ local plugins = {
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+            -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+        }
     },
     'sindrets/diffview.nvim',
     'MunifTanjim/nui.nvim',

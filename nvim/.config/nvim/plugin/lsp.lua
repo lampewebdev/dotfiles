@@ -1,8 +1,6 @@
-require("neoconf").setup({
-    -- override any of the default settings here
-})
+require("neoconf").setup({})
+local lsp_zero = require('lsp-zero')
 
-local lsp = require('lsp-zero').preset({})
 require("mason").setup({
     ui = {
         icons = {
@@ -13,22 +11,24 @@ require("mason").setup({
     },
     log_level = vim.log.levels.DEBUG
 })
-lsp.on_attach(function(client, bufnr)
-    lsp.default_keymaps({ buffer = bufnr })
+
+lsp_zero.on_attach(function(client, bufnr)
+    lsp_zero.default_keymaps({ buffer = bufnr })
 end)
 
-lsp.ensure_installed({
-    -- Replace these with whatever servers you want t
-    'tsserver',
-    'eslint',
-    'rust_analyzer',
-    'prosemd_lsp',
-    'jsonls'
+require('mason-lspconfig').setup({
+    ensure_installed = {
+        'tsserver',
+        'eslint',
+        'prosemd_lsp',
+        'jsonls'
+    },
+    handlers = {
+        lsp_zero.default_setup,
+    }
 })
-lsp.skip_server_setup({ 'rust_analyzer' });
-
 -- (Optional) Configure lua language server for neovim
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+-- require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 local rt = require("rust-tools")
 local mason_registry = require("mason-registry")
@@ -63,14 +63,14 @@ rt.setup({
     },
 })
 
-lsp.set_sign_icons({
+lsp_zero.set_sign_icons({
     error = '✘',
     warn = '▲',
     hint = '⚑',
     info = '»'
 })
 
-lsp.format_on_save({
+lsp_zero.format_on_save({
     format_opts = {
         async = false,
         timeout_ms = 10000,
@@ -83,12 +83,12 @@ lsp.format_on_save({
 
 local util = require('lspconfig.util')
 
-lsp.configure('angularls', {
-    root_dir = util.root_pattern('angular.json', 'package.json')
-})
+-- lsp.configure('angularls', {
+--     root_dir = util.root_pattern('angular.json', 'package.json')
+-- })
 
 
-lsp.setup()
+-- lsp.setup()
 
 vim.diagnostic.config()
 local opts = { noremap = true, silent = true }
@@ -117,11 +117,14 @@ opts.desc = "Type Definition"
 vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition, opts)
 opts.desc = "Hover: show desc"
 vim.keymap.set('n', '<leader>DD', vim.lsp.buf.hover, opts)
+opts.desc = "Rename"
+vim.keymap.set('n', '<leader>le', vim.lsp.buf.rename, opts)
 opts.desc = "signature"
 vim.keymap.set('n', '<leader>n', vim.lsp.buf.signature_help, opts)
 vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
 
 local cmp = require('cmp')
+local cmp_format = require('lsp-zero').cmp_format()
 
 cmp.setup({
     sources = cmp.config.sources({
@@ -134,6 +137,7 @@ cmp.setup({
     }, {
         { name = 'buffer' },
     }),
+    formatting = cmp_format,
     snippet = {
         expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
@@ -152,6 +156,9 @@ cmp.setup({
         ['<C-j>'] = cmp.mapping.select_prev_item(),
         ['<C-l>'] = cmp.mapping.abort(),
         ['<C-CR>'] = cmp.mapping.complete(),
+        -- scroll up and down the documentation window
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),
     }),
 })
 
