@@ -41,6 +41,10 @@ autoload -Uz compinit
 compinit
 source <(ng completion script)
 
+# go
+export PATH=$PATH:$(go env GOPATH)/bin
+
+
 export PATH=$PATH:~/code/learning/zig/zig/build/stage3/bin;
 PATH="/Users/lampe/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/Users/lampe/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
@@ -54,3 +58,22 @@ source ~/.config/broot/launcher/bash/br
 
 BAT_THEME="Catppuccin-mocha"
 eval "$(starship init zsh)"
+
+# bun completions
+[ -s "/Users/mlape6/.bun/_bun" ] && source "/Users/mlape6/.bun/_bun"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/mlape6/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/mlape6/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/mlape6/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/mlape6/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

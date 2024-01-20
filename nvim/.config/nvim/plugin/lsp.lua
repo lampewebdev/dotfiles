@@ -28,7 +28,11 @@ require('mason-lspconfig').setup({
     }
 })
 -- (Optional) Configure lua language server for neovim
--- require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+-- require('lspconfig').setup({
+--     opts = {
+--         inlay_hints = { enbaled = true }
+--     }
+-- });
 
 local rt = require("rust-tools")
 local mason_registry = require("mason-registry")
@@ -130,7 +134,7 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = 'path' },
         { name = 'vsnip' },
-        { name = 'buffer',                  keyword_length = 3 },
+        { name = 'buffer',                  keyword_length = 5 },
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lsp_document_symbol' },
         { name = 'nvim_lsp' },
@@ -146,6 +150,10 @@ cmp.setup({
     preselect = 'item',
     completion = {
         completeopt = 'menu,menuone,noinsert'
+    },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
     },
     experimental = {
         ghost_text = true,
