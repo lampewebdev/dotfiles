@@ -24,6 +24,26 @@ local plugins = {
     'Mofiqul/dracula.nvim',
     'folke/tokyonight.nvim',
     {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        dependencies = { "nvim-lua/plenary.nvim" }
+    },
+    -- {
+    --     "folke/noice.nvim",
+    --     event = "VeryLazy",
+    --     opts = {
+    --         -- add any options here
+    --     },
+    --     dependencies = {
+    --         -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+    --         "MunifTanjim/nui.nvim",
+    --         -- OPTIONAL:
+    --         --   `nvim-notify` is only needed, if you want to use the notification view.
+    --         --   If not available, we use `mini` as the fallback
+    --         "rcarriga/nvim-notify",
+    --     }
+    -- },
+    {
         'catppuccin/nvim',
         name = 'catppuccin',
         priority = 1000
@@ -39,7 +59,16 @@ local plugins = {
     'gerazov/toggle-bool.nvim',
     'lewis6991/gitsigns.nvim',
     'EdenEast/nightfox.nvim',
-    'goolord/alpha-nvim',
+    {
+        'goolord/alpha-nvim',
+        dependencies = {
+            'nvim-tree/nvim-web-devicons',
+            'nvim-lua/plenary.nvim'
+        },
+        config = function()
+            require 'alpha'.setup(require 'alpha.themes.theta'.config)
+        end
+    },
     'nvim-lualine/lualine.nvim',
     { 'nvim-treesitter/nvim-treesitter',  build = ":TSUpdate" },
     { 'williamboman/mason.nvim' },
