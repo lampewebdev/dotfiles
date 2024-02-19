@@ -1,17 +1,17 @@
 format = """
-[](#cba6f7)\
+[](#c099ff)\
 $username\
-[\ue0b4](bg:#f38ba8 fg:#cba6f7)\
+[\ue0b4](bg:#ff757f fg:#c099ff)\
 $directory\
-[\ue0b4](fg:#f38ba8 bg:#f9e2af)\
+[\ue0b4](fg:#ff757f bg:#ffc777)\
 $git_branch\
 $git_status\
-[\ue0b4](fg:#f9e2af bg:#74c7ec)\
+[\ue0b4](fg:#ffc777 bg:#4fd6be)\
 $nodejs\
 $rust\
-[\ue0b4](fg:#74c7ec) \ue285 \
+[\ue0b4](fg:#4fd6be) \ue285 \
 """
-# [ ](fg:#74c7ec)\
+# [ ](fg:#4fd6be)\
 # Disable the blank line at the start of the prompt
 # add_newline = false
 
@@ -19,19 +19,19 @@ $rust\
 # and use the os module below
 [username]
 show_always = true
-style_user = "bg:#cba6f7 fg:#4c4f69"
-style_root = "bg:#cba6f7 fg:#4c4f69"
+style_user = "bg:#c099ff fg:#4c4f69"
+style_root = "bg:#c099ff fg:#4c4f69"
 format = '[$user ]($style)'
 disabled = false
 
 # An alternative to the username module which displays a symbol that
 # represents the current operating system
 [os]
-style = "bg:#cba6f7"
+style = "bg:#c099ff"
 disabled = true      # Enabled by default
 
 [directory]
-style = "bg:#f38ba8 fg:#4c4f69"
+style = "bg:#ff757f fg:#4c4f69"
 format = "[ $path ]($style)"
 truncation_length = 1
 truncation_symbol = "…/"
@@ -57,37 +57,37 @@ format = '[ $symbol $context ]($style) $path'
 
 [git_branch]
 symbol = ""
-style = "bg:#f9e2af fg:#4c4f69"
+style = "bg:#ffc777 fg:#4c4f69"
 format = '[ $symbol $branch ]($style)'
 truncation_length = 10
 
 [git_status]
-style = "bg:#f9e2af fg:#4c4f69"
+style = "bg:#ffc777 fg:#4c4f69"
 format = '[$all_status$ahead_behind ]($style)'
 
 [golang]
 symbol = " "
-style = "bg:#74c7ec fg:#4c4f69"
+style = "bg:#4fd6be fg:#4c4f69"
 format = '[ $symbol ($version) ]($style)'
 
 [gradle]
-style = "bg:#74c7ec fg:#4c4f69"
+style = "bg:#4fd6be fg:#4c4f69"
 format = '[ $symbol ($version) ]($style)'
 
 [java]
 symbol = " "
-style = "bg:#74c7ec fg:#4c4f69"
+style = "bg:#4fd6be fg:#4c4f69"
 format = '[ $symbol ($version) ]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:#74c7ec fg:#4c4f69"
+style = "bg:#4fd6be fg:#4c4f69"
 format = '[ $symbol ($version) ]($style)'
 version_format = "v${major}"
 
 [rust]
 symbol = ""
-style = "bg:#74c7ec fg:#4c4f69"
+style = "bg:#4fd6be fg:#4c4f69"
 format = '[ $symbol ($version) ]($style)'
 
 [time]

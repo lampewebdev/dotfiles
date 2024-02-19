@@ -14,7 +14,7 @@ wezterm.on("gui-startup", function()
     window:gui_window():toggle_fullscreen()
 end)
 
-config.color_scheme = 'Tokyo Night'
+config.color_scheme = 'Tokyo Night Moon'
 -- config.color_scheme = 'tokyonight_night'
 config.font_size = 16
 -- config.font = wezterm.font 'Kode Mono'

@@ -1,5 +1,11 @@
 require 'nvim-treesitter.configs'.setup {
     ensure_installed = {
+        "jsdoc",
+        "json",
+        "jsonc",
+        "regex",
+        "tsx",
+        "yaml",
         "javascript",
         "markdown",
         "typescript",

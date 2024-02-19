@@ -1,6 +1,12 @@
 -- vim.cmd('colorscheme rose-pine')
 -- vim.cmd('colorscheme dracula')
-vim.cmd [[colorscheme tokyonight-night]]
+
+vim.cmd [[colorscheme tokyonight-moon]]
+
+-- require("tokyonight").setup({
+--  style = "moon"
+-- })
+--
 -- vim.cmd [[colorscheme catppuccin-mocha]]
 -- vim.cmd [[colorscheme catppuccin]]
 -- vim.cmd [[colorscheme kanagawa-wave]]
@@ -16,4 +22,4 @@ vim.cmd [[colorscheme tokyonight-night]]
 --     }
 -- })
 -- vim.cmd("colorscheme duskfox")
-require('nvim-highlight-colors').setup {}
+-- require('nvim-highlight-colors').setup {}

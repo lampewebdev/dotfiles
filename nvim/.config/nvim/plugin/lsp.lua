@@ -94,7 +94,9 @@ local util = require('lspconfig.util')
 
 -- lsp.setup()
 
-vim.diagnostic.config()
+vim.diagnostic.config({
+    underline = true,
+})
 local opts = { noremap = true, silent = true }
 opts.desc = "go to prev lsp"
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
