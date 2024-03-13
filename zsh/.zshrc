@@ -23,18 +23,17 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
 # pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
+export PNPM_HOME="/Users/michael/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 # pnpm end
 
 plugins=(git)
 
 # zoxide
 eval "$(zoxide init zsh)"
-unalias z
-function z () {
-    __zoxide_z "$@"
-}
 
 # Load Angular CLI autocompletion.
 autoload -Uz compinit
@@ -58,22 +57,3 @@ source ~/.config/broot/launcher/bash/br
 
 BAT_THEME="Catppuccin-mocha"
 eval "$(starship init zsh)"
-
-# bun completions
-[ -s "/Users/mlape6/.bun/_bun" ] && source "/Users/mlape6/.bun/_bun"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/mlape6/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/mlape6/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/mlape6/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/mlape6/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
