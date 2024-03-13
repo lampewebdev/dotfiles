@@ -1,1 +1,3 @@
-require("lampe")
+require("settings")
+require("keymaps")
+require("lazysetup")

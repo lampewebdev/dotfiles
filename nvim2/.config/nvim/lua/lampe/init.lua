@@ -1,3 +1,3 @@
 require("lampe.remap")
-require("lampe.set")
+require("lampefset")
 require("lampe.lazy")

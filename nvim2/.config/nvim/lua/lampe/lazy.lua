@@ -12,6 +12,29 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
+    {
+        "nvim-neorg/neorg",
+        build = ":Neorg sync-parsers",
+        lazy = false, -- specify lazy = false because some lazy.nvim distributions set lazy = true by default
+        -- tag = "*",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        config = function()
+            require("neorg").setup {
+                load = {
+                    ["core.defaults"] = {},  -- Loads default behaviour
+                    ["core.concealer"] = {}, -- Adds pretty icons to your documents
+                    ["core.dirman"] = {      -- Manages Neorg workspaces
+                        config = {
+                            workspaces = {
+                                notes = "~/notes",
+                            },
+                        },
+                    },
+                },
+            }
+        end,
+    },
+    { dir = "/Users/mlape6/code/ohhllama/" },
     "xiyaowong/transparent.nvim",
     "TabbyML/vim-tabby",
     'nvim-telescope/telescope.nvim',
@@ -23,6 +46,7 @@ local plugins = {
     'folke/neoconf.nvim',
     'Mofiqul/dracula.nvim',
     'folke/tokyonight.nvim',
+    "David-Kunz/gen.nvim",
     {
         "jiaoshijie/undotree",
         dependencies = "nvim-lua/plenary.nvim",
@@ -78,14 +102,15 @@ local plugins = {
         end
     },
     'nvim-lualine/lualine.nvim',
-    { 'nvim-treesitter/nvim-treesitter',  build = ":TSUpdate" },
+    { 'nvim-treesitter/nvim-treesitter',   build = ":TSUpdate" },
     { 'williamboman/mason.nvim' },
     { 'williamboman/mason-lspconfig.nvim' },
 
-    { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
+    { 'VonHeikemen/lsp-zero.nvim',         branch = 'v3.x' },
     { 'neovim/nvim-lspconfig' },
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'hrsh7th/nvim-cmp' },
+    { "samharju/synthweave.nvim" },
     { 'L3MON4D3/LuaSnip' },
     {
         'hrsh7th/nvim-cmp',
@@ -94,7 +119,7 @@ local plugins = {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/vim-vsnip',
             'hrsh7th/vim-vsnip',
-            'hrsh7th/cmp-vsnip'
+            -- 'hrsh7th/cmp-vsnip'
         }
     },
     { 'hrsh7th/cmp-buffer' },

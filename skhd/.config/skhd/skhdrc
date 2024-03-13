@@ -1,4 +1,5 @@
 alt - i : yabai -m window --focus south
+ZZ
 alt - e : yabai -m window --focus north
 alt - n : yabai -m window --focus west
 alt - o : yabai -m window --focus east
