@@ -34,11 +34,14 @@ plugins=(git)
 
 # zoxide
 eval "$(zoxide init zsh)"
-
 # Load Angular CLI autocompletion.
 autoload -Uz compinit
 compinit
 source <(ng completion script)
+
+# zoxide
+eval "$(zoxide init zsh)"
+
 
 # go
 export PATH=$PATH:$(go env GOPATH)/bin
