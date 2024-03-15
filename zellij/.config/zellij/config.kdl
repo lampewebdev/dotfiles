@@ -5,4 +5,5 @@
 // }
 
 // Choose the theme that is specified in the themes section.
-theme "tokyo-night-dark"
+// theme "tokyo-night-dark"
+theme "catppuccin-mocha"

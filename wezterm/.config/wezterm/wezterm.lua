@@ -1,20 +1,21 @@
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 local mux = wezterm.mux
 local config = {}
 if wezterm.config_builder then
-    config = wezterm.config_builder()
+	config = wezterm.config_builder()
 end
 
 config.send_composed_key_when_left_alt_is_pressed = true
 config.send_composed_key_when_right_alt_is_pressed = true
 
 wezterm.on("gui-startup", function()
-    wezterm.sleep_ms(1)
-    local tab, pane, window = mux.spawn_window(cmd or {})
-    window:gui_window():toggle_fullscreen()
+	wezterm.sleep_ms(1)
+	local tab, pane, window = mux.spawn_window(cmd or {})
+	window:gui_window():toggle_fullscreen()
 end)
 
-config.color_scheme = 'Tokyo Night Moon'
+-- config.color_scheme = "Tokyo Night Moon"
+config.color_scheme = "Catppuccin Mocha"
 -- config.color_scheme = 'tokyonight_night'
 config.font_size = 16
 -- config.font = wezterm.font 'Kode Mono'

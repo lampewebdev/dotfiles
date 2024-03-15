@@ -3,7 +3,9 @@ alias ls='eza -l'
 alias sl='eza -l'
 alias c='clear'
 alias v='nvim'
+alias vd="~/code/neovim/build/bin/nvim"
 alias ze='zellij'
+
 alias zea='zellij a'
 alias zel='zellij ls'
 alias zes='zellij -s'
