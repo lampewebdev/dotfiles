@@ -5,6 +5,8 @@ source_if_exists () {
     fi
 }
 
+export EDITOR=neovim
+
 source_if_exists $HOME/.env.sh
 source_if_exists $HOME/.aliases.zsh
 
