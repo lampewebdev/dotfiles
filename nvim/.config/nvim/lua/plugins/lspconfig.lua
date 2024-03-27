@@ -95,6 +95,22 @@ return {
 						end
 					end,
 				},
+				tailwindcss = {
+					filetypes = {
+						"scss",
+						"css",
+						"html",
+						"javascript",
+						"javascriptreact",
+						"javascript.jsx",
+						"typescript",
+						"typescriptreact",
+						"typescript.tsx",
+						"vue",
+						"svelte",
+						"astro",
+					},
+				},
 				lua_ls = {
 					on_attach = function(client, bufnr)
 						if client.server_capabilities.inlayHintProvider then

@@ -62,3 +62,6 @@ source ~/.config/broot/launcher/bash/br
 
 BAT_THEME="Catppuccin-mocha"
 eval "$(starship init zsh)"
+
+# java
+eval "$(jenv init -)"

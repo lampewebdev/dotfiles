@@ -11,6 +11,8 @@ alias zel='zellij ls'
 alias zes='zellij -s'
 alias stowh="stow --target $HOME"
 
+alias f='cd ~/code && cd $(fd --type d --hidden --exclude .git --exclude node_module --exclude .cache --exclude .npm --exclude .mozilla --exclude .meteor --exclude .nv --exclude .mvn --exclude .angular --exclude .husky --exclude .vscode --exclude changelogtest --exclude .obsidian | fzf)'
+
 # alias zig="/Users/mlape6/code/learning/zig/zig/build/stage3/bin/zig"
 
 alias gaa='git add --all'
