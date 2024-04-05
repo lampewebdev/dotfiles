@@ -18,6 +18,7 @@ end)
 config.color_scheme = "Catppuccin Mocha"
 -- config.color_scheme = 'tokyonight_night'
 config.font_size = 16
+-- config.font = wezterm.font("0xProto Nerd Font Mono")
 -- config.font = wezterm.font 'Kode Mono'
 -- config.font = wezterm.font 'Monaspace Krypton'
 -- config.font = wezterm.font 'Zed Mono'

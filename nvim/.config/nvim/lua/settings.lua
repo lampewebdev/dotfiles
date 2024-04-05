@@ -4,6 +4,8 @@ vim.g.have_nerd_font = true
 
 vim.opt.clipboard = "unnamedplus"
 
+vim.opt.conceallevel = 1
+
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
