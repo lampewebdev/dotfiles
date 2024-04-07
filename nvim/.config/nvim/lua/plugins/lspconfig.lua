@@ -95,11 +95,18 @@ return {
 						end
 					end,
 				},
+				htmx = {
+					filetypes = { "templ" },
+				},
+				html = {
+					filetypes = { "templ" },
+				},
 				tailwindcss = {
 					filetypes = {
 						"scss",
 						"css",
 						"html",
+						"templ",
 						"javascript",
 						"javascriptreact",
 						"javascript.jsx",
@@ -110,6 +117,7 @@ return {
 						"svelte",
 						"astro",
 					},
+					init_options = { userLanguages = { templ = "html" } },
 				},
 				lua_ls = {
 					on_attach = function(client, bufnr)
@@ -154,6 +162,12 @@ return {
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format lua code
+				"htmx",
+				"tailwindcss",
+				"html",
+				"templ",
+				"tsserver",
+				"gopls",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

@@ -9,7 +9,6 @@ return {
 				return ""
 			end
 			require("mini.comment").setup()
-			require("mini.starter").setup()
 		end,
 	},
 }
