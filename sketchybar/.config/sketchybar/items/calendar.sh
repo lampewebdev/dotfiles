@@ -4,15 +4,16 @@ COLOR="$BLUE"
 
 sketchybar --add item calendar right \
 	--set calendar update_freq=15 \
-	icon.color="$COLOR" \
-	icon.padding_left=10 \
-	label.color="$COLOR" \
-	label.padding_right=10 \
-	background.height=26 \
+    icon.color="$BAR_COLOR" \
+	icon.padding_left=15 \
+	icon.padding_right=10 \
+	label.color="$BAR_COLOR" \
+	label.padding_right=15 \
+	background.height=40 \
 	background.corner_radius="$CORNER_RADIUS" \
-	background.padding_right=5 \
+	background.padding_right=0 \
 	background.border_width="$BORDER_WIDTH" \
-	background.border_color="$COLOR" \
-	background.color="$BAR_COLOR" \
+	background.border_color="$BAR_COLOR" \
+	background.color="$COLOR" \
 	background.drawing=on \
 	script="$PLUGIN_DIR/calendar.sh"
