@@ -65,6 +65,15 @@ return {
 						"--hidden",
 						"--smart-case",
 					},
+					-- layout_strategy = "flex",
+					layout_config = {
+						-- horizontal = {
+						-- 	size = {
+						-- 		width = { padding = 0 },
+						-- 		height = { padding = 0 },
+						-- 	},
+						-- },
+					},
 				},
 				-- pickers = {}
 				extensions = {

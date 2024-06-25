@@ -91,7 +91,7 @@ return {
 					},
 					on_attach = function(client, bufnr)
 						if client.server_capabilities.inlayHintProvider then
-							vim.lsp.inlay_hint.enable(bufnr, true)
+							vim.lsp.inlay_hint.enable(true)
 						end
 					end,
 				},
@@ -100,6 +100,12 @@ return {
 				},
 				html = {
 					filetypes = { "templ" },
+				},
+				stylelint_lsp = {
+					filetypes = {
+						"css",
+						"scss",
+					},
 				},
 				tailwindcss = {
 					filetypes = {
@@ -116,13 +122,14 @@ return {
 						"vue",
 						"svelte",
 						"astro",
+						"heex",
 					},
 					init_options = { userLanguages = { templ = "html" } },
 				},
 				lua_ls = {
-					on_attach = function(client, bufnr)
+					on_attach = function(client)
 						if client.server_capabilities.inlayHintProvider then
-							vim.lsp.inlay_hint.enable(bufnr, true)
+							vim.lsp.inlay_hint.enable(true)
 						end
 					end,
 					settings = {
@@ -148,7 +155,7 @@ return {
 					},
 				},
 			}
-
+			require("lspconfig")["gleam"].setup({})
 			-- Ensure the servers and tools above are installed
 			--  To check the current status of installed tools and/or manually install
 			--  other tools, you can run

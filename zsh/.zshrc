@@ -5,6 +5,9 @@ source_if_exists () {
     fi
 }
 
+tmuxSesion () { ~/tmux-session.sh }
+bindkey '^f' tmuxSesion
+
 export EDITOR=neovim
 
 source_if_exists $HOME/.env.sh
@@ -62,6 +65,3 @@ source ~/.config/broot/launcher/bash/br
 
 BAT_THEME="Catppuccin-mocha"
 eval "$(starship init zsh)"
-
-# java
-eval "$(jenv init -)"

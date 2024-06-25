@@ -1,13 +1,29 @@
 return {
 	{
+		"rebelot/kanagawa.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("kanagawa").setup({
+				transparent = true,
+			})
+			vim.cmd.colorscheme("kanagawa-wave")
+		end,
+	},
+	{
 		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			-- Load the colorscheme here
-			-- vim.cmd.colorscheme("tokyonight-moon")
-			-- You can configure highlights by doing something like
-			-- vim.cmd.hi("Comment gui=none")
+			require("tokyonight").setup({
+				wtyle = "moon",
+				transparent = true,
+				styles = {
+					floats = "transparent",
+					sidebars = "transparent",
+				},
+			})
+			-- vim.cmd.colorscheme("tokyonight")
 		end,
 	},
 	{
@@ -16,6 +32,7 @@ return {
 		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
+				transparent_background = true,
 				cmp = true,
 				gitsigns = true,
 				neotree = true,
@@ -46,7 +63,7 @@ return {
 					},
 				},
 			})
-			vim.cmd.colorscheme("catppuccin-mocha")
+			-- vim.cmd.colorscheme("catppuccin-mocha")
 		end,
 	},
 }
