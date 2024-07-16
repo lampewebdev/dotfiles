@@ -1,4 +1,3 @@
-
 source_if_exists () {
     if test -r "$1"; then
         source "$1"
@@ -35,7 +34,7 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-plugins=(git)
+plugins=()
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -65,3 +64,8 @@ source ~/.config/broot/launcher/bash/br
 
 BAT_THEME="Catppuccin-mocha"
 eval "$(starship init zsh)"
+
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+fastfetch

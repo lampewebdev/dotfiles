@@ -5,7 +5,17 @@ return {
 		priority = 1000,
 		config = function()
 			require("kanagawa").setup({
+				commentStyle = { italic = true },
+				functionStyle = { italic = true },
+				keywordStyle = { italic = true },
+				statementStyle = { bold = true },
+				typeStyle = { italic = true },
 				transparent = true,
+				colors = {
+					palette = {
+						sumiInk4 = "#16161d",
+					},
+				},
 			})
 			vim.cmd.colorscheme("kanagawa-wave")
 		end,
