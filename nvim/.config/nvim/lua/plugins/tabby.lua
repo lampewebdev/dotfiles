@@ -1,4 +1,4 @@
-vim.g.tabby_keybinding_accept = "<C-y>"
+-- vim.g.tabby_keybinding_accept = "<C-y>"
 
 return {
 	{ "TabbyML/vim-tabby" },
