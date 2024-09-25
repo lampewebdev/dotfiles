@@ -52,6 +52,14 @@ return {
 				--  All the info you're looking for is in `:help telescope.setup()`
 				--
 				defaults = {
+					file_ignore_patterns = {
+						"^node_modules/",
+						".git/",
+						".yarn/",
+						"yarn.lock",
+						".angular/",
+						".vscode/",
+					},
 					--   mappings = {
 					--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 					--   },

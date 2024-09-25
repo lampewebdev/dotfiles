@@ -36,6 +36,14 @@ return {
 			-- vim.cmd.colorscheme("tokyonight")
 		end,
 	},
+	{
+		"xero/evangelion.nvim",
+		lazy = false,
+		priority = 1000,
+		init = function()
+			vim.cmd.colorscheme("evangelion")
+		end,
+	},
 	-- {
 	-- 	"catppuccin/nvim",
 	-- 	name = "catppuccin",

@@ -1,5 +1,5 @@
 return {
-	{ -- LSP Configuration & Plugins
+	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"williamboman/mason.nvim",
@@ -77,7 +77,7 @@ return {
 						"astro",
 					},
 				},
-				tsserver = {
+				ts_ls = {
 					init_options = {
 						preferences = {
 							includeInlayParameterNameHints = "all",
@@ -89,23 +89,11 @@ return {
 							includeInlayEnumMemberValueHints = true,
 						},
 					},
-					on_attach = function(client, bufnr)
+					on_attach = function(client)
 						if client.server_capabilities.inlayHintProvider then
 							vim.lsp.inlay_hint.enable(true)
 						end
 					end,
-				},
-				htmx = {
-					filetypes = { "templ" },
-				},
-				html = {
-					filetypes = { "templ" },
-				},
-				stylelint_lsp = {
-					filetypes = {
-						"css",
-						"scss",
-					},
 				},
 				tailwindcss = {
 					filetypes = {
@@ -122,9 +110,22 @@ return {
 						"vue",
 						"svelte",
 						"astro",
+						"elixir",
+						"eelixir",
 						"heex",
+						"eex",
 					},
-					init_options = { userLanguages = { templ = "html" } },
+					init_options = {
+						userLanguages = {
+							templ = "html",
+							elixir = "html-eex",
+							eelixir = "html-eex",
+							heex = "html-eex",
+						},
+					},
+				},
+				elixirls = {
+					cmd = { "/opt/homebrew/Cellar/elixir-ls/0.23.0/bin/elixir-ls" },
 				},
 				lua_ls = {
 					on_attach = function(client)
@@ -155,13 +156,7 @@ return {
 					},
 				},
 			}
-			require("lspconfig")["gleam"].setup({})
-			-- Ensure the servers and tools above are installed
-			--  To check the current status of installed tools and/or manually install
-			--  other tools, you can run
-			--    :Mason
-			--
-			--  You can press `g?` for help in this menu
+
 			require("mason").setup()
 
 			-- You can add other tools here that you want Mason to install
@@ -169,11 +164,10 @@ return {
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format lua code
-				"htmx",
 				"tailwindcss",
 				"html",
 				"templ",
-				"tsserver",
+				"ts_ls",
 				"gopls",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
