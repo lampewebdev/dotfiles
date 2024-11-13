@@ -7,3 +7,9 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 
 vim.keymap.set("v", "<C-j>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "<C-k>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("n", "<leader>db", "<cmd> DapToggleBreakpoint <CR>", { desc = "DEBUG: Add Breakpoint" })
+vim.keymap.set("n", "<leader>dus", function()
+	local widgets = require("dap.ui.widgets")
+	local sidebar = widgets.sidebar(widgets.scopes)
+	sidebar.open()
+end, { desc = "open debug sidepannel" })

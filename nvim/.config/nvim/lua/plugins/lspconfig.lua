@@ -65,6 +65,7 @@ return {
 			local servers = {
 				eslint = {
 					filetypes = {
+						"htmlangular",
 						"html",
 						"javascript",
 						"javascriptreact",
@@ -155,9 +156,41 @@ return {
 						},
 					},
 				},
+				gopls = {
+					on_attach = function(client)
+						if client.server_capabilities.inlayHintProvider then
+							vim.lsp.inlay_hint.enable(true)
+						end
+					end,
+					capabilities = capabilities,
+					cmd = { "gopls" },
+					filetypes = { "go", "gomod", "gowork", "gotmpl" },
+					settings = {
+						gopls = {
+							usePlaceholders = true,
+							analyses = {
+								unreachable = true,
+								unusedvariable = true,
+								unusedparams = true,
+							},
+						},
+					},
+				},
 			}
-
 			require("mason").setup()
+
+			require("lspconfig").tailwindcss.setup({
+				settings = {
+					tailwindCSS = {
+						experimental = {
+							classRegex = {
+								{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+								{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+							},
+						},
+					},
+				},
+			})
 
 			-- You can add other tools here that you want Mason to install
 			-- For you, so that they are available from within Neovim.
@@ -170,6 +203,7 @@ return {
 				"ts_ls",
 				"gopls",
 			})
+
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 			require("mason-lspconfig").setup({

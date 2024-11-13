@@ -65,7 +65,12 @@ source ~/.config/broot/launcher/bash/br
 BAT_THEME="Catppuccin-mocha"
 eval "$(starship init zsh)"
 
+if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
+  export PATH=/opt/homebrew/opt/ruby/bin:$PATH
+  export PATH=`gem environment gemdir`/bin:$PATH
+fi
 
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 fastfetch
+export PATH="$HOME/.rbenv/bin:$PATH"

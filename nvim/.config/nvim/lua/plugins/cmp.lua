@@ -6,6 +6,8 @@ return {
 			-- Snippet Engine & its associated nvim-cmp source
 			{
 				"L3MON4D3/LuaSnip",
+				version = "v2.*",
+				dependencies = { "rafamadriz/friendly-snippets" },
 				build = (function()
 					-- Build Step is needed for regex support in snippets
 					-- This step is not supported in many windows environments
@@ -30,11 +32,16 @@ return {
 		},
 		config = function()
 			-- See `:help cmp`
+			-- require("luasnip.loaders.from_vscode").lazy_load()
+			require("luasnip.loaders.from_vscode").lazy_load()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			luasnip.config.setup({})
 
 			cmp.setup({
+				experimental = {
+					ghost_text = true,
+				},
 				snippet = {
 					expand = function(args)
 						luasnip.lsp_expand(args.body)
@@ -60,8 +67,13 @@ return {
 					-- Manually trigger a completion from nvim-cmp.
 					--  Generally you don't need this, because nvim-cmp will display
 					--  completions whenever it has completion options available.
-					["<C-Space>"] = cmp.mapping.complete({}),
-
+					["<C-k>"] = function()
+						if cmp.visible() then
+							cmp.abort()
+						else
+							cmp.complete()
+						end
+					end,
 					-- Think of <c-l> as moving to the right of your snippet expansion.
 					--  So if you have a snippet that's like:
 					--  function $name($args)
@@ -85,6 +97,7 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "path" },
+					{ name = "buffer" },
 					{ naem = "tailwindcss" },
 				},
 			})
