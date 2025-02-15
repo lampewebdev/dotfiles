@@ -1,10 +1,7 @@
 local utf8 = require("utf8")
 local wezterm = require("wezterm")
-local config = {}
 
-if wezterm.config_builder then
-	config = wezterm.config_builder()
-end
+local config = wezterm.config_builder()
 
 config.send_composed_key_when_left_alt_is_pressed = true
 config.send_composed_key_when_right_alt_is_pressed = true
@@ -15,53 +12,19 @@ config.window_padding = {
 	bottom = 0,
 }
 
--- config.color_scheme = "Kanagawa (Gogh)"
--- config.color_scheme = "rose-pine"
-config.color_scheme = "Gruvbox dark, hard (base16)"
+config.color_scheme = "GruvboxDarkHard"
 config.font_size = 17
--- config.font = wezterm.font("MesloLGL Nerd Font", {})
--- config.font = wezterm.font({
--- 	family = "Monaspace Argon",
--- 	weight = "Bold",
--- })
--- config.font = wezterm.font({
--- 	family = "Monaspace Neon",
--- 	-- weight = "Bold",
--- })
--- config.font = wezterm.font("Monaspace Krypton", { weight = "DemiBold" })
--- config.font = wezterm.font("Monaspace Krypton Var", { weight = "Bold" })
--- config.font = wezterm.font("Monaspace Neon", {})
--- config.font = wezterm.font("Monaspace Radon", {})
--- config.font = wezterm.font("Monaspace Xenon", {})
-
--- config.font = wezterm.font({
--- 	family = "Comic Mono",
--- 	weight = "DemiBold",
--- })
--- config.font = wezterm.font({
--- 	family = "Lilex",
--- })
--- config.font = wezterm.font({
--- 	family = "CommitMono",
--- })
 config.font = wezterm.font({
 	family = "0xProto",
 })
--- config.line_height = 1.09
--- config.cell_width = 1.05
--- config.front_end = "WebGpu"
--- config.freetype_load_flags = "NO_HINTING"
--- config.freetype_load_target = "Mono"
--- config.freetype_load_target = "Light"
--- config.freetype_render_target = "HorizontalLcd"
 config.window_decorations = "RESIZE"
---
---
+
 config.hide_tab_bar_if_only_one_tab = true
 config.window_background_opacity = 1
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.max_fps = 120
+config.default_cursor_style = "BlinkingBlock"
 
 -- Leader is the same as my old tmux prefix
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
@@ -99,6 +62,26 @@ config.keys = {
 	},
 	{
 		mods = "LEADER",
+		key = "e",
+		action = wezterm.action.ActivatePaneDirection("Down"),
+	},
+	{
+		mods = "LEADER",
+		key = "i",
+		action = wezterm.action.ActivatePaneDirection("Up"),
+	},
+	{
+		mods = "LEADER",
+		key = "n",
+		action = wezterm.action.ActivatePaneDirection("Left"),
+	},
+	{
+		mods = "LEADER",
+		key = "o",
+		action = wezterm.action.ActivatePaneDirection("Right"),
+	},
+	{
+		mods = "LEADER",
 		key = "f",
 		action = wezterm.action.TogglePaneZoomState,
 	},
@@ -125,12 +108,12 @@ config.keys = {
 }
 
 config.tab_and_split_indices_are_zero_based = true
-for i = 0, 9 do
+for i = 1, 9 do
 	-- leader + number to activate that tab
 	table.insert(config.keys, {
 		key = tostring(i),
 		mods = "LEADER",
-		action = wezterm.action.ActivateTab(i),
+		action = wezterm.action.ActivateTab(i - 1),
 	})
 end
 

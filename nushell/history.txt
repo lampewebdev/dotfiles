@@ -1,0 +1,52 @@
+rm -rf /Users/michael/.config/
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs<\n>~/.config/emacs/bin/doom install
+cd /Users/michael/.config/emacs/.local/straight/repos/
+git clone --origin origin --no-checkout https\://git.savannah.gnu.org/git/emacs/nongnu.git /Users/michael/.config/emacs/.local/straight/repos/nongnu-elpa/ --depth 1 --single-branch --no-tags
+git clone --origin origin --no-checkout https://git.savannah.gnu.org/git/emacs/nongnu.git /Users/michael/.config/emacs/.local/straight/repos/nongnu-elpa/ --depth 1 --single-branch --no-tags
+z
+git clone --origin origin --no-checkout https\://git.savannah.gnu.org/git/emacs/nongnu.git /Users/michael/.config/emacs/.local/straight/repos/nongnu-elpa/ --depth 1 --single-branch --no-tags
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs<\n>~/.config/emacs/bin/doom install
+z
+ls
+ls -la
+z
+z .config/
+z
+.config/emacs/bin/doom install
+.config/emacs/bin/doom sync
+ls
+clear
+.config/emacs/bin/doom install
+emacs
+ls -la
+cd .config/
+ls
+cd code/dotfiles/
+ls
+ls -la
+ls wezterm/.config/wezterm/
+ls
+fish
+ls
+stow
+fish
+stowh
+ls
+cd eza
+cd code/
+ls
+cd dotfiles
+ls
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+ls
+stow
+brew
+ls
+chsh -s /usr/local/bin/fish
+echo /usr/local/bin/fish | sudo tee -a /etc/shells
+chsh -s /usr/local/bin/fish
+ls
+echo 'usr/bin/nu' | sudo tee -a /etc/shells
+chsh -s (which nu)
+chsh -s "/bin/nu"
+ls

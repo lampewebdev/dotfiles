@@ -1,24 +1,39 @@
 return {
-	{ -- Autoformat
+	{
 		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		log_level = vim.log.levels.DEBUG,
+		keys = {
+			{
+				-- Customize or remove this keymap to your liking
+				"<leader>f",
+				function()
+					require("conform").format({ async = true })
+				end,
+				mode = "",
+				desc = "Format buffer",
+			},
+		},
+		-- This will provide type hinting with LuaLS
+		---@module "conform"
+		---@type conform.setupOpts
 		opts = {
-			notify_on_error = true,
 			format_on_save = {
 				timeout_ms = 500,
-				lsp_fallback = true,
+				-- lsp_format = "last",
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
-				-- Conform can also run multiple formatters sequentially
-				-- python = { "isort", "black" },
-				--
-				-- You can use a sub-list to tell conform to run *until* a formatter
-				-- is found.
-				javascript = { "eslint", "prettierd", "prettier", stop_after_first = true },
-				typescript = { "eslint", "prettierd", "prettier", stop_after_first = true },
-				html = { "eslint", "prettierd", "prettier", stop_after_first = true },
-				htmlangular = { "eslint", "prettierd", "prettier", stop_after_first = true },
+				javascript = { "prettierd" },
+				typescript = { "prettierd" },
+				html = { "prettierd" },
+				htmlangular = { "prettierd" },
 			},
 		},
+		init = function()
+			-- If you want the formatexpr, here is the place to set it
+			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+		end,
 	},
 }

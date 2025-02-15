@@ -7,7 +7,22 @@ return {
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{ "j-hui/fidget.nvim", opts = {} },
 		},
-		config = function()
+		opts = {
+			servers = {
+				lua_ls = {},
+				angularls = {},
+				eslint = {},
+			},
+		},
+		config = function(_, opts)
+			local lspconfig = require("lspconfig")
+			for server, config in pairs(opts.servers) do
+				-- passing config.capabilities to blink.cmp merges with the capabilities in your
+				-- `opts[server].capabilities, if you've defined it
+				config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+				lspconfig[server].setup(config)
+			end
+
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
@@ -15,16 +30,16 @@ return {
 						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
 
-					map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-					map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-					map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-					map(
-						"<leader>ws",
-						require("telescope.builtin").lsp_dynamic_workspace_symbols,
-						"[W]orkspace [S]ymbols"
-					)
+					-- map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+					-- map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+					-- map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+					-- map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+					-- map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+					-- map(
+					-- 	"<leader>ws",
+					-- 	require("telescope.builtin").lsp_dynamic_workspace_symbols,
+					-- 	"[W]orkspace [S]ymbols"
+					-- )
 					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -51,7 +66,7 @@ return {
 			--  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
 			--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+			-- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 			-- Enable the following language servers
 			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -73,28 +88,54 @@ return {
 						"typescript",
 						"typescriptreact",
 						"typescript.tsx",
-						"vue",
-						"svelte",
-						"astro",
 					},
 				},
-				ts_ls = {
-					init_options = {
-						preferences = {
-							includeInlayParameterNameHints = "all",
-							includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-							includeInlayFunctionParameterTypeHints = true,
-							includeInlayVariableTypeHints = true,
-							includeInlayPropertyDeclarationTypeHints = true,
-							includeInlayFunctionLikeReturnTypeHints = true,
-							includeInlayEnumMemberValueHints = true,
-						},
-					},
+				-- ts_ls = {
+				-- 	init_options = {
+				-- 		preferences = {
+				-- 			includeInlayParameterNameHints = "all",
+				-- 			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+				-- 			includeInlayFunctionParameterTypeHints = true,
+				-- 			includeInlayVariableTypeHints = true,
+				-- 			includeInlayPropertyDeclarationTypeHints = true,
+				-- 			includeInlayFunctionLikeReturnTypeHints = true,
+				-- 			includeInlayEnumMemberValueHints = true,
+				-- 		},
+				-- 	},
+				-- 	on_attach = function(client)
+				-- 		if client.server_capabilities.inlayHintProvider then
+				-- 			vim.lsp.inlay_hint.enable(true)
+				-- 		end
+				-- 	end,
+				-- },
+				vtsls = {
 					on_attach = function(client)
 						if client.server_capabilities.inlayHintProvider then
 							vim.lsp.inlay_hint.enable(true)
 						end
 					end,
+				},
+				prettier = {
+					filetypes = {
+						"htmlangular",
+						"scss",
+						"css",
+						"html",
+						"templ",
+						"javascript",
+						"javascriptreact",
+						"javascript.jsx",
+						"typescript",
+						"typescriptreact",
+						"typescript.tsx",
+						"vue",
+						"svelte",
+						"astro",
+						"elixir",
+						"eelixir",
+						"heex",
+						"eex",
+					},
 				},
 				tailwindcss = {
 					filetypes = {
@@ -156,30 +197,11 @@ return {
 						},
 					},
 				},
-				gopls = {
-					on_attach = function(client)
-						if client.server_capabilities.inlayHintProvider then
-							vim.lsp.inlay_hint.enable(true)
-						end
-					end,
-					capabilities = capabilities,
-					cmd = { "gopls" },
-					filetypes = { "go", "gomod", "gowork", "gotmpl" },
-					settings = {
-						gopls = {
-							usePlaceholders = true,
-							analyses = {
-								unreachable = true,
-								unusedvariable = true,
-								unusedparams = true,
-							},
-						},
-					},
-				},
 			}
+
 			require("mason").setup()
 
-			require("lspconfig").tailwindcss.setup({
+			lspconfig.tailwindcss.setup({
 				settings = {
 					tailwindCSS = {
 						experimental = {
@@ -198,9 +220,6 @@ return {
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format lua code
 				"tailwindcss",
-				"html",
-				"templ",
-				"ts_ls",
 				"gopls",
 			})
 
