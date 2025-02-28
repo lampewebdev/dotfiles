@@ -1,3 +1,5 @@
 require("settings")
 require("keymaps")
+require("lsp")
+require("lsp/angularls")
 require("lazysetup")

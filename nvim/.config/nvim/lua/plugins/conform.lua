@@ -29,6 +29,7 @@ return {
 				typescript = { "prettierd" },
 				html = { "prettierd" },
 				htmlangular = { "prettierd" },
+				templ = { "templ", "html", "htmx" },
 			},
 		},
 		init = function()

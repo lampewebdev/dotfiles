@@ -9,11 +9,11 @@ return {
 			desc = "Diagnostics (Trouble)",
 		},
 		{
-			"<leader>xX",
+  		"<leader>xX",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 			desc = "Buffer Diagnostics (Trouble)",
 		},
-		{
+ 		{
 			"<leader>cs",
 			"<cmd>Trouble symbols toggle focus=false<cr>",
 			desc = "Symbols (Trouble)",

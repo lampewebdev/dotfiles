@@ -3,12 +3,15 @@ return {
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"neovim/nvim-lspconfig",
+		},
 		opts = {
 			dashboard = { enabled = true },
-			notifier = { enabled = true },
+			notifier = { enabled = false },
 			quickfile = { enabled = true },
 			image = { enabled = true },
-			statuscolumn = { enabled = true },
 			words = { enabled = true },
 			picker = { enabled = true },
 			explorer = { enabled = true },

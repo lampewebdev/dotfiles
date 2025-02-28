@@ -13,7 +13,7 @@ config.window_padding = {
 }
 
 config.color_scheme = "GruvboxDarkHard"
-config.font_size = 17
+config.font_size = 14
 config.font = wezterm.font({
 	family = "0xProto",
 })
