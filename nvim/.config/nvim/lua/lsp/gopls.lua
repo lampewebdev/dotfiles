@@ -11,6 +11,16 @@ local function gopls()
 		root_markers = {
 			"go.mod",
 		},
+		settings = {
+			gopls = {
+				analyses = {
+					unusedparams = true,
+					modernize = true,
+				},
+				staticcheck = true,
+				gofumpt = true,
+			},
+		},
 	})
 
 	vim.lsp.enable("gopls")

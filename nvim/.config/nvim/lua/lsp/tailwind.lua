@@ -2,7 +2,7 @@ local function tailwind()
 	local mason_bin = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/")
 
 	vim.lsp.config("tailwind", {
-		cmd = { mason_bin .. "tailwindcss-language-server" },
+		cmd = { mason_bin .. "tailwindcss-language-server", "--stdio" },
 		filetypes = {
 			"scss",
 			"htmlangular",
@@ -18,21 +18,47 @@ local function tailwind()
 			"vue",
 			"svelte",
 			"astro",
-			"elixir",
-			"eelixir",
-			"heex",
-			"eex",
 		},
-		init_options = {
-			userLanguages = {
-				templ = "html",
-			},
+		root_markers = {
+			"tailwind.config.js",
+			"tailwind.config.cjs",
+			"tailwind.config.mjs",
+			"tailwind.config.ts",
+			"postcss.config.js",
+			"postcss.config.cjs",
+			"postcss.config.mjs",
+			"postcss.config.ts",
 		},
 		settings = {
-			experimental = {
-				classRegex = {
-					{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-					{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+			tailwindCSS = {
+				validate = true,
+				lint = {
+					cssConflict = "warning",
+					invalidApply = "error",
+					invalidScreen = "error",
+					invalidVariant = "error",
+					invalidConfigPath = "error",
+					invalidTailwindDirective = "error",
+					recommendedVariantOrder = "warning",
+				},
+				classAttributes = {
+					"class",
+					"className",
+					"class:list",
+					"classList",
+					"ngClass",
+				},
+				includeLanguages = {
+					eelixir = "html-eex",
+					eruby = "erb",
+					templ = "html",
+					htmlangular = "html",
+				},
+				experimental = {
+					classRegex = {
+						{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+						{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+					},
 				},
 			},
 		},

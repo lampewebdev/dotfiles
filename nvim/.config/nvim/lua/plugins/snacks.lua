@@ -7,7 +7,11 @@ return {
 			"nvim-tree/nvim-web-devicons",
 			"neovim/nvim-lspconfig",
 		},
+		---@type snacks.Config
 		opts = {
+			statuscolumn = { enabled = true },
+			animate = { enabled = true },
+			bigfile = { enabled = true },
 			dashboard = { enabled = true },
 			notifier = { enabled = false },
 			quickfile = { enabled = true },
@@ -16,16 +20,16 @@ return {
 			picker = { enabled = true },
 			explorer = { enabled = true },
 			indent = { enabled = true },
+			scope = { enabled = true },
 		},
 		keys = {
 			-- explorer
 			{
-				"<leader>n",
+				"<leader>N",
 				function()
 					Snacks.explorer.open({ follow_file = true, hidden = true })
 				end,
 				desc = "Toggle Explorer",
-				mode = { "n" },
 			},
 			-- buffers
 			{
@@ -159,5 +163,10 @@ return {
 				desc = "LSP Workspace Symbols",
 			},
 		},
+	},
+	{
+		"b0o/SchemaStore.nvim",
+		lazy = true,
+		version = false, -- last release is way too old
 	},
 }

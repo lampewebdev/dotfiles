@@ -12,7 +12,10 @@ config.window_padding = {
 	bottom = 0,
 }
 
-config.color_scheme = "GruvboxDarkHard"
+-- config.color_scheme = "GruvboxDarkHard"
+-- config.color_scheme = "Tokyo Night Moon"
+-- config.color_scheme = "Tokyo Night Storm"
+config.color_scheme = "tokyonight"
 config.font_size = 14
 config.font = wezterm.font({
 	family = "0xProto",

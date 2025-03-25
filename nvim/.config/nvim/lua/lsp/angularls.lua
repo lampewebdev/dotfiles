@@ -1,4 +1,4 @@
-local function angularls()
+function angularls()
 	local function get_probe_dir(root_dir)
 		local project_root = vim.fs.dirname(vim.fs.find("node_modules", { path = root_dir, upward = true })[1])
 
