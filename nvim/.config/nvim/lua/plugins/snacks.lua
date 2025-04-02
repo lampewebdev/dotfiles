@@ -166,7 +166,7 @@ return {
 	},
 	{
 		"b0o/SchemaStore.nvim",
-		lazy = true,
+		lazy = false,
 		version = false, -- last release is way too old
 	},
 }

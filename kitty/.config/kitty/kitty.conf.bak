@@ -106,7 +106,7 @@ symbol_map U+276c-U+2771 Symbols Nerd Font Mono
 symbol_map U+2500-U+259f Symbols Nerd Font Mono
 
 # BEGIN_KITTY_THEME
-# Dracula
+# Gruvbox Dark Hard
 include current-theme.conf
 # END_KITTY_THEME#
 

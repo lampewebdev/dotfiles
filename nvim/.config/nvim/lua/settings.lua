@@ -17,6 +17,7 @@ vim.opt.wrap = false
 vim.opt.termguicolors = true
 vim.opt.showmode = false
 
+vim.o.winborder = "rounded"
 vim.opt.number = true
 
 vim.opt.undofile = true
@@ -30,3 +31,15 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.inccommand = "split"
 
 vim.opt.hlsearch = true
+
+vim.diagnostic.config({
+	-- Use the default configuration
+	-- virtual_text = true,
+	-- virtual_lines = true,
+
+	-- Alternatively, customize specific options
+	virtual_lines = {
+		-- Only show virtual line diagnostics for the current cursor line
+		current_line = true,
+	},
+})

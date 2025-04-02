@@ -36,8 +36,13 @@ return {
 			signature = { enabled = true },
 			fuzzy = { implementation = "prefer_rust_with_warning" },
 			completion = {
-				menu = { border = "single" },
-				documentation = { window = { border = "single" } },
+				menu = { draw = { treesitter = { "lsp" } } },
+				ghost_text = { enabled = true },
+				documentation = {
+					auto_show = true,
+					auto_show_delay_ms = 200,
+					window = { border = "single" },
+				},
 			},
 			cmdline = {
 				completion = { menu = { auto_show = true } },

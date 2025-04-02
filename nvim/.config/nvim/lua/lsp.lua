@@ -8,6 +8,9 @@ require("lsp/htmx")()
 require("lsp/prettierd")()
 require("lsp/gopls")()
 require("lsp/jsonls")()
+require("lsp/zls")()
+
+vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 
 local map = function(keys, func, desc)
 	vim.keymap.set("n", keys, func, { desc = "LSP: " .. desc })
