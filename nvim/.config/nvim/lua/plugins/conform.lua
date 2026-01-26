@@ -25,11 +25,14 @@ return {
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { "prettierd" },
-				typescript = { "prettierd" },
-				html = { "prettierd" },
-				htmlangular = { "prettierd" },
+				javascript = { "biome check" },
+				typescript = { "biome" },
+				javascriptreact = { "biome", "biome-check" },
+				typescriptreact = { "biome", "biome-check" },
+				html = { "biome", "biome-check" },
+				htmlangular = { "biome", "biome-check" },
 				templ = { "templ", "html", "htmx" },
+				zig = { "zigfmt" },
 			},
 		},
 		init = function()

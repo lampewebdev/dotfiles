@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/michael/.zsh/completions:"* ]]; then export FPATH="/Users/michael/.zsh/completions:$FPATH"; fi
 source_if_exists () {
     if test -r "$1"; then
         source "$1"
@@ -74,3 +76,4 @@ export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 fastfetch
 export PATH="$HOME/.rbenv/bin:$PATH"
+. "/Users/michael/.deno/env"

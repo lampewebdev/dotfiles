@@ -1,5 +1,6 @@
 require("lsp/angularls")()
 require("lsp/luals")()
+require("lsp/biome")()
 require("lsp/eslint")()
 require("lsp/vtsls")()
 require("lsp/tailwind")()
