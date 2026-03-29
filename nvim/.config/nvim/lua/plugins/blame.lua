@@ -1,7 +1,7 @@
 return {
 	{
 		"FabijanZulj/blame.nvim",
-		lazy = false,
+		cmd = { "BlameToggle", "BlameShowVirtual", "BlameHideVirtual", "BlameShowCommit" },
 		config = function()
 			require("blame").setup({})
 		end,
