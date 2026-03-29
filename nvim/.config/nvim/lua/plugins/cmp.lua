@@ -17,6 +17,9 @@ return {
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
+			enabled = function()
+				return not vim.tbl_contains({ "AgenticInput" }, vim.bo.filetype)
+			end,
 			keymap = { preset = "default" },
 			appearance = {
 				use_nvim_cmp_as_default = true,

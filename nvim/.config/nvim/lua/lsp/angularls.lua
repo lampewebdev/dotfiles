@@ -1,63 +1,32 @@
-function angularls()
-	local function get_probe_dir(root_dir)
-		local project_root = vim.fs.dirname(vim.fs.find("node_modules", { path = root_dir, upward = true })[1])
+local function angularls()
+	local mason_pkg = vim.fn.expand("$HOME/.local/share/nvim/mason/packages/angular-language-server/")
+	local mason_modules = mason_pkg .. "node_modules"
+	local mason_nested_modules = mason_modules .. "/@angular/language-server/node_modules"
 
-		return project_root and (project_root .. "/node_modules") or ""
-	end
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = { "html", "htmlangular", "typescript" },
+		callback = function(ev)
+			local root = vim.fs.root(ev.buf, "angular.json")
+			if not root then
+				return
+			end
 
-	local function get_angular_core_version(root_dir)
-		local project_root = vim.fs.dirname(vim.fs.find("node_modules", { path = root_dir, upward = true })[1])
+			local probe = root .. "/node_modules," .. mason_modules .. "," .. mason_nested_modules
 
-		if not project_root then
-			return ""
-		end
-
-		local package_json = project_root .. "/package.json"
-		if not vim.loop.fs_stat(package_json) then
-			return ""
-		end
-
-		local contents = io.open(package_json):read("*a")
-		local json = vim.json.decode(contents)
-		if not json.dependencies then
-			return ""
-		end
-
-		local angular_core_version = json.dependencies["@angular/core"]
-
-		angular_core_version = angular_core_version and angular_core_version:match("%d+%.%d+%.%d+")
-
-		return angular_core_version
-	end
-
-	local default_probe_dir = get_probe_dir(vim.fn.getcwd())
-	local default_angular_core_version = get_angular_core_version(vim.fn.getcwd())
-	local ngserver = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/ngserver")
-
-	vim.lsp.config("angularls", {
-		cmd = {
-			ngserver,
-			"--stdio",
-			"--tsProbeLocations",
-			default_probe_dir,
-			"--ngProbeLocations",
-			default_probe_dir,
-			"--angularCoreVersion",
-			default_angular_core_version,
-		},
-		filetypes = {
-			"html",
-			"htmlangular",
-			"javascript",
-			"javascriptreact",
-			"javascript.jsx",
-			"typescript",
-			"typescriptreact",
-			"typescript.tsx",
-		},
-		root_markers = { "angular.json" },
+			vim.lsp.start({
+				name = "angularls",
+				cmd = {
+					"node",
+					mason_modules .. "/@angular/language-server/index.js",
+					"--stdio",
+					"--tsProbeLocations",
+					probe,
+					"--ngProbeLocations",
+					probe,
+				},
+				root_dir = root,
+			})
+		end,
 	})
-	vim.lsp.enable("angularls")
 end
-
 return angularls

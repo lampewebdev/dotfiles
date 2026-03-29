@@ -3,7 +3,6 @@ return {
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
-		log_level = vim.log.levels.DEBUG,
 		keys = {
 			{
 				-- Customize or remove this keymap to your liking
@@ -23,6 +22,14 @@ return {
 				timeout_ms = 500,
 				-- lsp_format = "last",
 			},
+			formatters = {
+				odinfmt = {
+					-- Change where to find the command if it isn't in your path.
+					command = "odinfmt",
+					args = { "-stdin" },
+					stdin = true,
+				},
+			},
 			formatters_by_ft = {
 				lua = { "stylua" },
 				javascript = { "biome check" },
@@ -33,6 +40,7 @@ return {
 				htmlangular = { "biome", "biome-check" },
 				templ = { "templ", "html", "htmx" },
 				zig = { "zigfmt" },
+				odin = { "odinfmt" },
 			},
 		},
 		init = function()

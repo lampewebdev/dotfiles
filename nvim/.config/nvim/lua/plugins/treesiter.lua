@@ -9,23 +9,54 @@ return {
 					"bash",
 					"html",
 					"lua",
-					"markdown",
 					"vim",
 					"vimdoc",
 					"typescript",
 				},
-				auto_install = true,
+				auto_install = false,
 				sync_install = false,
-				highlight = { enable = true },
-				indent = { enable = true },
+				highlight = { 
+					enable = true,
+					disable = function(lang, buf)
+						-- Disable highlighting for markdown files due to Tree-sitter issues
+						if lang == "markdown" or lang == "markdown_inline" then
+							return true
+						end
+						-- Disable highlighting for very large files
+						local max_filesize = 100 * 1024 -- 100 KB
+						local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+						if ok and stats and stats.size > max_filesize then
+							return true
+						end
+					end,
+				},
+				indent = { 
+					enable = true,
+					disable = function(lang)
+						-- Also disable indent for markdown
+						if lang == "markdown" or lang == "markdown_inline" then
+							return true
+						end
+					end,
+				},
 			})
-			-- if type(opts.ensure_installed) == "table" then
-			-- 	vim.list_extend(opts.ensure_installed, { "angular", "scss" })
-			-- end
+			
 			vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
 				pattern = { "*.component.html", "*.container.html" },
 				callback = function()
 					vim.treesitter.start(nil, "angular")
+				end,
+			})
+			
+			-- Prevent Tree-sitter from starting on markdown files
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "markdown",
+				callback = function(args)
+					-- Disable tree-sitter for this buffer
+					pcall(function()
+						vim.treesitter.stop(args.buf)
+						vim.bo[args.buf].syntax = "markdown"
+					end)
 				end,
 			})
 		end,
