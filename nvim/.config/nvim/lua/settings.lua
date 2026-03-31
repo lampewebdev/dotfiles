@@ -1,5 +1,12 @@
 vim.g.have_nerd_font = true
 
+-- System clipboard integration for macOS
+vim.g.clipboard = {
+	name = "macOS-clipboard",
+	copy = { "+", "pbcopy" },
+	paste = { "+", "pbpaste" },
+}
+
 vim.opt.conceallevel = 0
 
 vim.opt.expandtab = true
@@ -42,30 +49,25 @@ vim.diagnostic.config({
 	},
 })
 
--- Wrap the Tree-sitter start function to prevent markdown from being parsed
-local orig_start = vim.treesitter.start
-vim.treesitter.start = function(bufnr, lang)
-	bufnr = bufnr or vim.api.nvim_get_current_buf()
-	lang = lang or vim.bo[bufnr].filetype
-	
-	-- Block markdown and markdown_inline from being parsed
-	if lang == "markdown" or lang == "markdown_inline" then
-		return
-	end
-	
-	return orig_start(bufnr, lang)
-end
+-- Preact filetype detection
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+	pattern = { "*.preact.*", "preact.config.*" },
+	callback = function(args)
+		local filename = vim.fn.fnamemodify(args.file, ":t")
+		if filename:match("%.preact%.") then
+			vim.bo.filetype = filename:match("tsx$") and "typescriptreact" or "javascript"
+		elseif filename:match("^preact%.") then
+			vim.bo.filetype = filename:match("%.m?js$") and "javascript" or "typescript"
+		end
+	end,
+})
 
--- Also wrap get_parser to prevent markdown parsing at a lower level
-local orig_get_parser = vim.treesitter.get_parser
-vim.treesitter.get_parser = function(bufnr, lang, ...)
-	bufnr = bufnr or vim.api.nvim_get_current_buf()
-	lang = lang or vim.bo[bufnr].filetype
-	
-	-- Block markdown and markdown_inline from being parsed
-	if lang == "markdown" or lang == "markdown_inline" then
-		error("Tree-sitter parsing is disabled for markdown files", 0)
-	end
-	
-	return orig_get_parser(bufnr, lang, ...)
-end
+-- CSS Modules detection (*.module.css, *.module.scss)
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+	pattern = { "*.module.css", "*.module.scss", "*.module.sass" },
+	callback = function()
+		vim.bo.filetype = vim.fn.expand("%:t:r"):match("%.module$") 
+			and (vim.fn.expand("%:e") == "scss" and "scss" or "css")
+			or vim.bo.filetype
+	end,
+})

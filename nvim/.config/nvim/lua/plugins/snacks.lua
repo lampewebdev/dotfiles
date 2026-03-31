@@ -15,41 +15,12 @@ return {
 			dashboard = { enabled = true },
 			notifier = { enabled = false },
 			quickfile = { enabled = true },
-			image = { 
-				enabled = true,
-				filter = function(buf)
-					-- Disable image for markdown files due to Tree-sitter issues
-					local ft = vim.bo[buf].filetype
-					if ft == "markdown" then
-						return false
-					end
-				end,
-			},
+			image = { enabled = true },
 			words = { enabled = true },
-			picker = { 
-				enabled = true,
-			},
+			picker = { enabled = true },
 			explorer = { enabled = true },
-			indent = { 
-				enabled = true,
-				filter = function(buf)
-					-- Disable indent for markdown files
-					local ft = vim.bo[buf].filetype
-					if ft == "markdown" then
-						return false
-					end
-				end,
-			},
-			scope = { 
-				enabled = true,
-				filter = function(buf)
-					-- Disable scope for markdown files
-					local ft = vim.bo[buf].filetype
-					if ft == "markdown" then
-						return false
-					end
-				end,
-			},
+			indent = { enabled = true },
+			scope = { enabled = true },
 		},
 		keys = {
 			-- explorer

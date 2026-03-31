@@ -1,8 +1,9 @@
 -- Load centralized LSP configuration
 require("lsp.config")
 
--- Keep Angular LS setup (requires special handling)
+-- Load language-specific LSP configurations
 require("lsp/angularls")()
+require("lsp/preact")()
 
 -- LSP Keymaps
 local map = function(keys, func, desc)
@@ -16,5 +17,11 @@ map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 map("gi", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
 
 -- Enable inlay hints
-vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		if vim.lsp.inlay_hint then
+			vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+		end
+	end,
+})
 

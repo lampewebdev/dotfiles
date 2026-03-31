@@ -166,6 +166,54 @@ vim.lsp.config("tailwind", {
 })
 vim.lsp.enable("tailwind")
 
+-- CSS Language Server (for CSS Modules support)
+vim.lsp.config("css", {
+	cmd = { mason_bin .. "vscode-css-language-server", "--stdio" },
+	filetypes = {
+		"css",
+		"scss",
+		"less",
+		"postcss",
+	},
+	root_markers = { ".git", "package.json" },
+	settings = {
+		css = {
+			validate = true,
+			lint = {
+				compatibleVendorPrefixes = "warning",
+				duplicateProperties = "warning",
+				emptyRule = "warning",
+				importStatement = "warning",
+				unknownProperties = "error",
+				validProperties = {},
+			},
+			format = {
+				insertSpaces = true,
+				tabSize = 2,
+			},
+			hover = {
+				documentation = true,
+				references = true,
+			},
+			validateOnTypescript = true,
+		},
+		scss = {
+			validate = true,
+			lint = {
+				compatibleVendorPrefixes = "warning",
+				duplicateProperties = "warning",
+				emptyRule = "warning",
+				importStatement = "warning",
+				unknownProperties = "error",
+			},
+		},
+		less = {
+			validate = true,
+		},
+	},
+})
+vim.lsp.enable("css")
+
 -- Go Language Server
 vim.lsp.config("gopls", {
 	cmd = { mason_bin .. "gopls" },
@@ -229,5 +277,10 @@ vim.lsp.config("eslint", {
 })
 vim.lsp.enable("eslint")
 
--- Note: Angular Language Server is handled specially with autocmd in angularls.lua
--- as it requires complex path setup and root detection
+-- Bash Language Server
+vim.lsp.config("bash-language-server", {
+	cmd = { mason_bin .. "bash-language-server", "start" },
+	filetypes = { "sh", "bash" },
+	root_markers = { ".git", ".bashrc", ".bash_profile" },
+})
+vim.lsp.enable("bash-language-server")
