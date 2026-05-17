@@ -1,7 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
-		event = "VeryLazy",
+		ft = { "go", "javascript", "typescript", "python" },
 		dependencies = {
 			"rcarriga/nvim-dap-ui",
 			"nvim-neotest/nvim-nio",
@@ -34,7 +34,12 @@ return {
 			{
 				"<leader>da",
 				function()
-					require("dap").continue({ before = get_args })
+					local args = vim.fn.input("Args: ", "", "file")
+					if args ~= "" then
+						require("dap").continue({ args = vim.split(args, " ") })
+					else
+						require("dap").continue()
+					end
 				end,
 				desc = "Run with Args",
 			},

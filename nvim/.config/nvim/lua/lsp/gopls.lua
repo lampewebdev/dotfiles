@@ -1,5 +1,8 @@
 local function gopls()
-	local mason_bin = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/")
+	local constants = require("lsp.constants")
+	local shared = require("lsp.shared")
+	local mason_bin = constants.MASON_BIN
+
 	vim.lsp.config("gopls", {
 		cmd = { mason_bin .. "gopls" },
 		filetypes = {
@@ -11,16 +14,7 @@ local function gopls()
 		root_markers = {
 			"go.mod",
 		},
-		settings = {
-			gopls = {
-				analyses = {
-					unusedparams = true,
-					modernize = true,
-				},
-				staticcheck = true,
-				gofumpt = true,
-			},
-		},
+		settings = shared.gopls_settings,
 	})
 
 	vim.lsp.enable("gopls")

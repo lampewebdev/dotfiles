@@ -1,7 +1,8 @@
 -- Centralized LSP configuration using vim.lsp.config (Neovim 0.11+)
 -- This replaces individual vim.lsp.config() calls scattered across multiple files
 
-local mason_bin = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/")
+local constants = require("lsp.constants")
+local mason_bin = constants.MASON_BIN
 
 -- Helper to get root directory
 local function get_root(bufnr, markers)

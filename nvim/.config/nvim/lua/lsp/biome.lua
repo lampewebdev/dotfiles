@@ -1,5 +1,6 @@
 local function biome()
-	local mason_bin = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/")
+	local constants = require("lsp.constants")
+	local mason_bin = constants.MASON_BIN
 
 	vim.lsp.config("biome", {
 		cmd = { mason_bin .. "biome", "lsp-proxy" },

@@ -1,5 +1,6 @@
 local function angularls()
-	local mason_pkg = vim.fn.expand("$HOME/.local/share/nvim/mason/packages/angular-language-server/")
+	local constants = require("lsp.constants")
+	local mason_pkg = constants.MASON_PKG .. "angular-language-server/"
 	local mason_modules = mason_pkg .. "node_modules"
 	local mason_nested_modules = mason_modules .. "/@angular/language-server/node_modules"
 

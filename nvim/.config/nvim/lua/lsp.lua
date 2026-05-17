@@ -1,9 +1,5 @@
--- Load centralized LSP configuration
-require("lsp.config")
-
--- Load language-specific LSP configurations
-require("lsp/angularls")()
-require("lsp/preact")()
+-- LSP configuration is now lazy-loaded via plugins/lsp/*.lua specs
+-- Each LSP loads on its respective FileType
 
 -- LSP Keymaps
 local map = function(keys, func, desc)
@@ -13,8 +9,7 @@ end
 map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 map("K", vim.lsp.buf.hover, "Hover Documentation")
-map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-map("gi", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+-- Note: gD defined in snacks.lua (Goto Declaration). Use gd for builtin definition.
 
 -- Enable inlay hints
 vim.api.nvim_create_autocmd("LspAttach", {

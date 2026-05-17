@@ -1,10 +1,27 @@
 -- Preact Language Server Configuration
--- Uses vtsls with Preact-specific settings
-
+-- Uses vtsls with Preact-specific settings (additional root markers and filetypes)
+-- This is kept separate to allow project detection based on preact-specific files
 local function preact()
-	local mason_bin = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/")
+	local constants = require("lsp.constants")
+	local shared = require("lsp.shared")
+	local mason_bin = constants.MASON_BIN
 
 	-- Preact uses TypeScript, so we configure vtsls with Preact-specific options
+	local preact_settings = vim.tbl_deep_extend("force", shared.typescript_settings, {
+		typescript = vim.tbl_deep_extend("force", shared.typescript_settings.typescript, {
+			preferences = {
+				includePackageJsonAutoImports = "on",
+				includeCompletionsForModuleExports = true,
+			},
+		}),
+		javascript = {
+			preferences = {
+				includePackageJsonAutoImports = "on",
+				includeCompletionsForModuleExports = true,
+			},
+		},
+	})
+
 	vim.lsp.config("preact", {
 		cmd = { mason_bin .. "vtsls", "--stdio" },
 		filetypes = {
@@ -24,35 +41,7 @@ local function preact()
 			"preact.config.mjs",
 			"package.json",
 		},
-		settings = {
-			complete_function_calls = true,
-			vtsls = {
-				enableMoveToFileCodeAction = true,
-				autoUseWorkspaceTsdk = true,
-			},
-			typescript = {
-				updateImportsOnFileMove = { enabled = "always" },
-				suggest = { completeFunctionCalls = true },
-				inlayHints = {
-					enumMemberValues = { enabled = true },
-					functionLikeReturnTypes = { enabled = true },
-					parameterNames = { enabled = "literals" },
-					parameterTypes = { enabled = true },
-					propertyDeclarationTypes = { enabled = true },
-					variableTypes = { enabled = true },
-				},
-				preferences = {
-					includePackageJsonAutoImports = "on",
-					includeCompletionsForModuleExports = true,
-				},
-			},
-			javascript = {
-				preferences = {
-					includePackageJsonAutoImports = "on",
-					includeCompletionsForModuleExports = true,
-				},
-			},
-		},
+		settings = preact_settings,
 	})
 	vim.lsp.enable("preact")
 end

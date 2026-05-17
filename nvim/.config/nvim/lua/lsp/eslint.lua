@@ -25,7 +25,8 @@ local function has_eslint_config(bufnr)
 end
 
 local function eslint()
-	local mason_bin = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/")
+	local constants = require("lsp.constants")
+	local mason_bin = constants.MASON_BIN
 
 	vim.lsp.config("eslint", {
 		cmd = { mason_bin .. "vscode-eslint-language-server", "--stdio" },

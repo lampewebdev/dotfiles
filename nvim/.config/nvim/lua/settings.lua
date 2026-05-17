@@ -1,12 +1,6 @@
 vim.g.have_nerd_font = true
 
--- System clipboard integration for macOS
-vim.g.clipboard = {
-	name = "macOS-clipboard",
-	copy = { "+", "pbcopy" },
-	paste = { "+", "pbpaste" },
-}
-
+vim.opt.clipboard = "unnamedplus"
 vim.opt.conceallevel = 0
 
 vim.opt.expandtab = true
@@ -66,8 +60,27 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
 	pattern = { "*.module.css", "*.module.scss", "*.module.sass" },
 	callback = function()
-		vim.bo.filetype = vim.fn.expand("%:t:r"):match("%.module$") 
-			and (vim.fn.expand("%:e") == "scss" and "scss" or "css")
-			or vim.bo.filetype
+		local filename = vim.fn.fnamemodify(vim.fn.expand("%"), ":t")
+		if filename:match("%.module%.") then
+			local ext = vim.fn.expand("%:e")
+			vim.bo.filetype = ext == "scss" and "scss" or "css"
+		end
+	end,
+})
+
+-- Snacks explorer: ensure ZQ/ZZ work in explorer buffer
+-- Use BufEnter to catch explorer window when it opens
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function(args)
+		-- Check if this is snacks explorer by checking buffer name
+		if vim.fn.bufname(args.buf):match("snacks") or vim.bo.filetype:match("snacks") then
+			-- Use proper ex-command format to avoid register parsing
+			vim.keymap.set("n", "ZQ", function()
+				vim.cmd("qa!")
+			end, { buf = args.buf, noremap = true })
+			vim.keymap.set("n", "ZZ", function()
+				vim.cmd("wq")
+			end, { buf = args.buf, noremap = true })
+		end
 	end,
 })

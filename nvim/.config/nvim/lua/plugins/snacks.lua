@@ -1,45 +1,78 @@
+-- snacks.lua
+-- A collection of useful Neovim tools:
+--   - File explorer
+--   - Picker (find files, grep, buffers, etc.)
+--   - Dashboard (start screen)
+--   - Git integration
+--   - And more!
+
 return {
 	{
 		"folke/snacks.nvim",
-		priority = 1000,
-		lazy = false,
+		priority = 1000, -- Load early
+		lazy = false,    -- Load at startup
+
 		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			"neovim/nvim-lspconfig",
+			"nvim-tree/nvim-web-devicons", -- File icons
 		},
-		---@type snacks.Config
+
+		-- Enable/disable specific features
 		opts = {
-			statuscolumn = { enabled = true },
-			animate = { enabled = true },
-			bigfile = { enabled = true },
-			dashboard = { enabled = true },
+			-- UI improvements
+			statuscolumn = { enabled = true }, -- Show git signs in column
+			indent = { enabled = true },       -- Show indent guides
+			bigfile = { enabled = true },      -- Handle large files better
+
+			-- Disable features we don't need
+			animate = { enabled = false },
 			notifier = { enabled = false },
-			quickfile = { enabled = true },
-			image = { enabled = true },
-			words = { enabled = true },
-			picker = { enabled = true },
-			explorer = { enabled = true },
-			indent = { enabled = true },
-			scope = { enabled = true },
+			quickfile = { enabled = false },
+			image = { enabled = false },
+			words = { enabled = false },
+			picker = { enabled = false },
+			scope = { enabled = false },
+
+			-- Dashboard on startup
+			dashboard = { enabled = true },
+
+			-- File explorer settings
+			explorer = {
+				enabled = true,
+				replace_netrw = true, -- Use snacks instead of netrw
+				keys = {
+					["ZZ"] = false, -- Disable to avoid conflicts
+					["ZQ"] = false,
+				},
+			},
 		},
+
+		-- Keybindings (these lazy-load the plugin)
 		keys = {
-			-- explorer
+			-- File explorer: press Space + N
 			{
 				"<leader>N",
 				function()
-					Snacks.explorer.open({ follow_file = true, hidden = true })
+					if not vim.w.explorer_opening then
+						vim.w.explorer_opening = true
+						vim.defer_fn(function()
+							vim.w.explorer_opening = false
+						end, 100)
+						Snacks.explorer.open({ follow_file = true, hidden = true })
+					end
 				end,
 				desc = "Toggle Explorer",
 			},
-			-- buffers
+
+			-- Buffers: press Space + Space
 			{
 				"<leader><space>",
 				function()
 					Snacks.picker.buffers()
 				end,
-				desc = "Buffers",
+				desc = "Show open buffers",
 			},
-			-- files
+
+			-- File search
 			{
 				"<leader>sf",
 				function()
@@ -47,21 +80,26 @@ return {
 				end,
 				desc = "Find Files",
 			},
+
+			-- Grep search
 			{
 				"<leader>sg",
 				function()
 					Snacks.picker.grep({ hidden = true })
 				end,
-				desc = "Grep",
+				desc = "Grep in files",
 			},
+
+			-- Recent files
 			{
 				"<leader>sr",
 				function()
 					Snacks.picker.recent()
 				end,
-				desc = "Recent",
+				desc = "Recent Files",
 			},
-			-- git
+
+			-- Git branches
 			{
 				"<leader>gb",
 				function()
@@ -69,6 +107,8 @@ return {
 				end,
 				desc = "Git Branches",
 			},
+
+			-- Git log
 			{
 				"<leader>gl",
 				function()
@@ -76,20 +116,26 @@ return {
 				end,
 				desc = "Git Log",
 			},
+
+			-- Git log for current line
 			{
 				"<leader>gL",
 				function()
 					Snacks.picker.git_log_line()
 				end,
-				desc = "Git Log Line",
+				desc = "Git Log (current line)",
 			},
+
+			-- Git status
 			{
-				"<leader>gs",
+				"<leader>gst",
 				function()
 					Snacks.picker.git_status()
 				end,
 				desc = "Git Status",
 			},
+
+			-- Git stash
 			{
 				"<leader>gS",
 				function()
@@ -97,6 +143,8 @@ return {
 				end,
 				desc = "Git Stash",
 			},
+
+			-- Git diff
 			{
 				"<leader>gd",
 				function()
@@ -104,63 +152,77 @@ return {
 				end,
 				desc = "Git Diff (Hunks)",
 			},
+
+			-- Git log for file
 			{
-				"<leader>gf",
+				"<leader>gF",
 				function()
 					Snacks.picker.git_log_file()
 				end,
-				desc = "Git Log File",
+				desc = "Git Log (file)",
 			},
-			-- LSP
+
+			-- LSP: Go to definition
 			{
 				"gd",
 				function()
 					Snacks.picker.lsp_definitions()
 				end,
-				desc = "Goto Definition",
+				desc = "Go to Definition",
 			},
+
+			-- LSP: Go to declaration
 			{
 				"gD",
 				function()
 					Snacks.picker.lsp_declarations()
 				end,
-				desc = "Goto Declaration",
+				desc = "Go to Declaration",
 			},
+
+			-- LSP: Find references
 			{
 				"gr",
 				function()
 					Snacks.picker.lsp_references()
 				end,
-				nowait = true,
-				desc = "References",
+				desc = "Find References",
 			},
+
+			-- LSP: Go to implementation
 			{
 				"gI",
 				function()
 					Snacks.picker.lsp_implementations()
 				end,
-				desc = "Goto Implementation",
+				desc = "Go to Implementation",
 			},
+
+			-- LSP: Go to type definition
 			{
 				"gy",
 				function()
 					Snacks.picker.lsp_type_definitions()
 				end,
-				desc = "Goto T[y]pe Definition",
+				desc = "Go to Type Definition",
 			},
+
+			-- LSP: Show symbols in buffer
 			{
 				"<leader>ss",
 				function()
 					Snacks.picker.lsp_symbols()
 				end,
-				desc = "LSP Symbols",
+				desc = "LSP Symbols (buffer)",
 			},
+
+			-- LSP: Show all symbols in workspace
 			{
 				"<leader>sS",
 				function()
 					Snacks.picker.lsp_workspace_symbols()
 				end,
-				desc = "LSP Workspace Symbols",
+				desc = "LSP Symbols (workspace)",
 			},
 		},
 	},

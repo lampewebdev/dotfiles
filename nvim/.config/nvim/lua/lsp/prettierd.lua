@@ -1,5 +1,6 @@
 local function prettierd()
-	local mason_bin = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/")
+	local constants = require("lsp.constants")
+	local mason_bin = constants.MASON_BIN
 
 	vim.lsp.config("prettierd", {
 		cmd = { mason_bin .. "prettierd" },

@@ -1,5 +1,6 @@
 local function templ()
-	local mason_bin = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/")
+	local constants = require("lsp.constants")
+	local mason_bin = constants.MASON_BIN
 
 	vim.lsp.config("templ", {
 		cmd = { mason_bin .. "templ", "lsp" },

@@ -1,23 +1,74 @@
+-- ============================================================
+-- KEYMAPS: Keyboard shortcuts for Neovim
+-- ============================================================
+-- Syntax: vim.keymap.set(mode, key, action, options)
+--   mode: "n" = normal, "i" = insert, "v" = visual
+--   key: the key(s) to press
+--   action: what happens (command, function, or string)
+--   options: optional settings like { desc = "description" }
+-- ============================================================
+
+-- ESC to clear search highlights
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- Quit shortcuts (work even in file explorer)
+vim.keymap.set("n", "ZQ", "<cmd>qa!<CR>", { noremap = true, desc = "Quit all without saving" })
+vim.keymap.set("n", "ZZ", "<cmd>wq<CR>", { noremap = true, desc = "Write and quit" })
+
+-- ============================================================
+-- DIAGNOSTICS: navigate between error/warning messages
+-- ============================================================
 vim.keymap.set("n", "[d", function()
 	vim.diagnostic.jump({ count = -1 })
-end, { desc = "Go to previous [D]iagnostic message" })
+end, { desc = "Go to previous diagnostic message" })
+
 vim.keymap.set("n", "]d", function()
 	vim.diagnostic.jump({ count = 1 })
-end, { desc = "Go to next [D]iagnostic message" })
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+end, { desc = "Go to next diagnostic message" })
 
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
-vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
-vim.keymap.set({ "n", "v" }, "<leader>P", '"+P', { desc = "Paste before cursor from system clipboard" })
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic messages" })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open quickfix list" })
 
+-- ============================================================
+-- CLIPBOARD: copy/paste to system clipboard (macOS)
+-- Uses pbcopy/pbpaste since neovim clipboard support is not available
+-- ============================================================
+-- Yank to register z, then copy that to system clipboard
+vim.keymap.set("n", "<leader>y", function()
+	vim.cmd('normal! "zy')
+	local text = vim.fn.getreg('z')
+	vim.fn.system({ 'pbcopy' }, text)
+end, { desc = "Copy to system clipboard" })
+
+vim.keymap.set("v", "<leader>y", function()
+	vim.cmd('normal! "zy')
+	local text = vim.fn.getreg('z')
+	vim.fn.system({ 'pbcopy' }, text)
+end, { desc = "Copy selection to clipboard" })
+
+-- Paste from system clipboard
+vim.keymap.set({ "n", "v" }, "<leader>p", function()
+	local content = vim.fn.system({ 'pbpaste' })
+	vim.api.nvim_put({ content:gsub('\n$', '') }, 'c', true, true)
+end, { desc = "Paste from system clipboard" })
+
+-- Paste before cursor
+vim.keymap.set({ "n", "v" }, "<leader>P", function()
+	local content = vim.fn.system({ 'pbpaste' })
+	vim.api.nvim_put({ content:gsub('\n$', '') }, 'c', false, true)
+end, { desc = "Paste before cursor" })
+
+-- ============================================================
+-- MOVE LINES: move selected lines up/down in visual mode
+-- ============================================================
 vim.keymap.set("v", "<C-j>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "<C-k>", ":m '>+1<CR>gv=gv")
 
--- Angular-specific keybindings
-vim.keymap.set("n", "<leader>gc", function()
+-- ============================================================
+-- ANGULAR: Angular framework shortcuts
+-- ============================================================
+-- Jump between Angular component files (template, styles, etc.)
+vim.keymap.set("n", "<leader>agc", function()
 	local filename = vim.fn.expand("%:t:r")
 	local component_name = filename:gsub("%..*$", "")
 	local html_file = vim.fn.findfile(component_name .. ".component.html", ".;")
@@ -26,15 +77,15 @@ vim.keymap.set("n", "<leader>gc", function()
 	else
 		vim.cmd("edit %:h/" .. component_name .. ".component.html")
 	end
-end, { desc = "Angular: Go to Component template" })
+end, { desc = "Angular: Go to component template" })
 
-vim.keymap.set("n", "<leader>gt", function()
+vim.keymap.set("n", "<leader>agt", function()
 	local filename = vim.fn.expand("%:t:r")
 	local component_name = filename:gsub("%..*$", "")
 	vim.cmd("edit %:h/" .. component_name .. ".component.html")
-end, { desc = "Angular: Go to Template" })
+end, { desc = "Angular: Go to template" })
 
-vim.keymap.set("n", "<leader>gs", function()
+vim.keymap.set("n", "<leader>ags", function()
 	local filename = vim.fn.expand("%:t:r")
 	local component_name = filename:gsub("%..*$", "")
 	local ext = vim.fn.expand("%:e")
@@ -45,9 +96,9 @@ vim.keymap.set("n", "<leader>gs", function()
 	if style_file ~= "" then
 		vim.cmd("edit " .. style_file)
 	end
-end, { desc = "Angular: Go to Styles" })
+end, { desc = "Angular: Go to styles" })
 
-vim.keymap.set("n", "<leader>gf", function()
+vim.keymap.set("n", "<leader>agf", function()
 	local filename = vim.fn.expand("%:t:r")
 	local base_name = filename:gsub("%..*$", "")
 	local files = vim.fn.readdir(vim.fn.expand("%:h"), function(name)
@@ -60,13 +111,15 @@ end, { desc = "Angular: Find related files" })
 
 vim.keymap.set("n", "<leader>ec", function()
 	vim.lsp.buf.code_action({ context = { only = { "refactor.extract.ts" } } })
-end, { desc = "Angular: Extract to Component" })
+end, { desc = "Angular: Extract to component" })
 
-vim.keymap.set("n", "<leader>as", function()
+vim.keymap.set("n", "<leader>agss", function()
 	vim.lsp.buf.document_symbol()
-end, { desc = "Angular: Show Structure" })
+end, { desc = "Angular: Show structure" })
 
--- TypeScript/JavaScript keybindings
+-- ============================================================
+-- TYPESCRIPT: JavaScript/TypeScript shortcuts
+-- ============================================================
 vim.keymap.set("n", "<leader>ft", function()
 	local current = vim.fn.expand("%:p")
 	local test_patterns = {
@@ -93,7 +146,7 @@ vim.keymap.set("n", "<leader>ft", function()
 	else
 		vim.cmd("edit " .. vim.fn.fnamemodify(current, ":r") .. ".spec" .. vim.fn.fnamemodify(current, ":e"))
 	end
-end, { desc = "TypeScript: Toggle Test File" })
+end, { desc = "Toggle test file" })
 
 vim.keymap.set("n", "<leader>fr", function()
 	local current_file = vim.fn.expand("%:p")
@@ -103,16 +156,16 @@ vim.keymap.set("n", "<leader>fr", function()
 		vim.cmd("edit " .. current_file)
 		vim.cmd("bdelete! " .. new_file)
 	end
-end, { desc = "TypeScript: Rename File" })
+end, { desc = "Rename file" })
 
 vim.keymap.set("n", "<leader>fi", function()
 	vim.lsp.buf.implementation()
-end, { desc = "TypeScript: Find Implementations" })
+end, { desc = "Find implementations" })
 
 vim.keymap.set("n", "<leader>fo", function()
 	Snacks.picker.symbols()
-end, { desc = "TypeScript: File Outline" })
+end, { desc = "File outline" })
 
 vim.keymap.set("n", "<leader>fu", function()
 	vim.lsp.buf.code_action({ context = { only = { "quickfix" } } })
-end, { desc = "TypeScript: Find Unused Imports" })
+end, { desc = "Find unused imports" })

@@ -1,5 +1,6 @@
 local function ols()
-	local mason_bin = vim.fn.expand("~/.local/share/nvim/mason/bin/ols")
+	local constants = require("lsp.constants")
+	local mason_bin = constants.MASON_BIN .. "ols"
 	local cellar_root = "/opt/homebrew/Cellar/odin/2026-03/libexec"
 
 	-- Ensure we have the full diagnostic capabilities set

@@ -1,5 +1,7 @@
 local function jsonls()
-	local mason_bin = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/")
+	local constants = require("lsp.constants")
+	local shared = require("lsp.shared")
+	local mason_bin = constants.MASON_BIN
 
 	vim.lsp.config("jsonls", {
 		cmd = { mason_bin .. "vscode-json-language-server", "--stdio" },
@@ -8,14 +10,7 @@ local function jsonls()
 			provideFormatter = true,
 		},
 		single_file_support = true,
-		settings = {
-			json = {
-				format = {
-					enable = true,
-				},
-				validate = { enable = true },
-			},
-		},
+		settings = shared.json_settings,
 	})
 
 	vim.lsp.enable("jsonls")

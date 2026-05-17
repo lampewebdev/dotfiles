@@ -1,5 +1,7 @@
 local function tailwind()
-	local mason_bin = vim.fn.expand("$HOME/.local/share/nvim/mason/bin/")
+	local constants = require("lsp.constants")
+	local shared = require("lsp.shared")
+	local mason_bin = constants.MASON_BIN
 
 	vim.lsp.config("tailwind", {
 		cmd = { mason_bin .. "tailwindcss-language-server", "--stdio" },
@@ -29,39 +31,7 @@ local function tailwind()
 			"postcss.config.mjs",
 			"postcss.config.ts",
 		},
-		settings = {
-			tailwindCSS = {
-				validate = true,
-				lint = {
-					cssConflict = "warning",
-					invalidApply = "error",
-					invalidScreen = "error",
-					invalidVariant = "error",
-					invalidConfigPath = "error",
-					invalidTailwindDirective = "error",
-					recommendedVariantOrder = "warning",
-				},
-				classAttributes = {
-					"class",
-					"className",
-					"class:list",
-					"classList",
-					"ngClass",
-				},
-				includeLanguages = {
-					eelixir = "html-eex",
-					eruby = "erb",
-					templ = "html",
-					htmlangular = "html",
-				},
-				experimental = {
-					classRegex = {
-						{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
-						{ "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
-					},
-				},
-			},
-		},
+		settings = shared.tailwind_settings,
 	})
 	vim.lsp.enable("tailwind")
 end
