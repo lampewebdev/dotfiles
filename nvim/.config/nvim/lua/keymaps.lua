@@ -31,32 +31,13 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open quick
 
 -- ============================================================
 -- CLIPBOARD: copy/paste to system clipboard (macOS)
--- Uses pbcopy/pbpaste since neovim clipboard support is not available
+-- Uses + register
 -- ============================================================
--- Yank to register z, then copy that to system clipboard
-vim.keymap.set("n", "<leader>y", function()
-	vim.cmd('normal! "zy')
-	local text = vim.fn.getreg('z')
-	vim.fn.system({ 'pbcopy' }, text)
-end, { desc = "Copy to system clipboard" })
-
-vim.keymap.set("v", "<leader>y", function()
-	vim.cmd('normal! "zy')
-	local text = vim.fn.getreg('z')
-	vim.fn.system({ 'pbcopy' }, text)
-end, { desc = "Copy selection to clipboard" })
-
--- Paste from system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>p", function()
-	local content = vim.fn.system({ 'pbpaste' })
-	vim.api.nvim_put({ content:gsub('\n$', '') }, 'c', true, true)
-end, { desc = "Paste from system clipboard" })
-
--- Paste before cursor
-vim.keymap.set({ "n", "v" }, "<leader>P", function()
-	local content = vim.fn.system({ 'pbpaste' })
-	vim.api.nvim_put({ content:gsub('\n$', '') }, 'c', false, true)
-end, { desc = "Paste before cursor" })
+-- Yank/paste via + register so motions like <leader>yiw work
+vim.keymap.set({ "n", "x" }, "<leader>y", '"+y', { desc = "Copy to system clipboard" })
+vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Copy line to system clipboard" })
+vim.keymap.set({ "n", "x" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+vim.keymap.set({ "n", "x" }, "<leader>P", '"+P', { desc = "Paste before cursor" })
 
 -- ============================================================
 -- MOVE LINES: move selected lines up/down in visual mode

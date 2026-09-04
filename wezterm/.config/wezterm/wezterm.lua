@@ -3,7 +3,8 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-config.send_composed_key_when_left_alt_is_pressed = true
+-- Left Option = Alt (vmux binds); right Option still composes chars (€, ñ, ~)
+config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = true
 config.window_padding = {
 	left = 0,
@@ -12,7 +13,8 @@ config.window_padding = {
 	bottom = 0,
 }
 
--- config.color_scheme = "GruvboxDarkHard"
+config.color_scheme = "GruvboxDarkHard"
+config.color_scheme = 'aikofog (terminal.sexy)'
 config.color_scheme = "Tokyo Night Moon"
 -- config.color_scheme = "Tokyo Night Storm"
 -- config.color_scheme = "tokyonight"

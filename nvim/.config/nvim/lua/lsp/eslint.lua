@@ -20,10 +20,6 @@ local function get_root_dir(bufnr)
 	return match
 end
 
-local function has_eslint_config(bufnr)
-	return get_root_dir(bufnr) ~= nil
-end
-
 local function eslint()
 	local constants = require("lsp.constants")
 	local mason_bin = constants.MASON_BIN
@@ -47,13 +43,6 @@ local function eslint()
 			"typescript.tsx",
 		},
 		root_dir = get_root_dir,
-		on_init = function(client)
-			if not has_eslint_config(0) then
-				vim.schedule(function()
-					vim.notify("[eslint] No config file found - LSP may not work correctly", vim.log.levels.WARN)
-				end)
-			end
-		end,
 	})
 	vim.lsp.enable("eslint")
 end

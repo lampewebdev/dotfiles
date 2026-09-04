@@ -1,9 +1,9 @@
 -- TypeScript/JavaScript LSP (vtsls)
-return {
-	{
-		"neovim/nvim-lspconfig",
-		ft = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
-		config = function()
+	return {
+		{
+			"neovim/nvim-lspconfig",
+			ft = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+			config = function()
 			local constants = require("lsp.constants")
 			local shared = require("lsp.shared")
 			local mason_bin = constants.MASON_BIN

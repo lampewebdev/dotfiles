@@ -33,13 +33,24 @@ export PATH="$HOME/bin:$PATH"
 export PATH="$PATH:$HOME/.pub-cache/bin"
 export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="/Users/michael/.usagi/bin:$PATH"
 
 # pnpm
+# Two directories matter: $PNPM_HOME/bin holds pnpm 11+ and its own shims,
+# while $PNPM_HOME itself still holds globals installed before that move.
+# Dropping either one silently loses commands.
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PNPM_HOME:$PATH" ;;
 esac
+
+# Node managed by pnpm. Globbed rather than version-pinned, so a `pnpm env use`
+# does not silently strip node from PATH. (N) is nullglob: no match, no error.
+for _pnpm_node in "$PNPM_HOME"/nodejs/*/bin(N); do
+  export PATH="$PATH:$_pnpm_node"
+done
+unset _pnpm_node
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -66,8 +77,13 @@ source_if_exists "$HOME/.deno/env"
 source_if_exists "$HOME/code/villain/helpers/shell-init.sh"
 
 
-# Load Angular CLI autocompletion.
-source <(ng completion script)
 
-# Vite+ bin (https://viteplus.dev)
-. "$HOME/.vite-plus/env"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/michael/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/michael/.local/bin:$PATH"

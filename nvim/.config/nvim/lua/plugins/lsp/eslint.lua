@@ -26,10 +26,6 @@ return {
 				return match or vim.fn.getcwd()
 			end
 
-			local function has_eslint_config(bufnr)
-				return get_root_dir(bufnr) ~= nil
-			end
-
 			vim.lsp.config("eslint", {
 				cmd = { mason_bin .. "vscode-eslint-language-server", "--stdio" },
 				filetypes = { "htmlangular", "html", "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
@@ -38,13 +34,6 @@ return {
 					nodePath = "",
 					experimental = { useFlatConfig = true },
 				},
-				on_init = function(client)
-					if not has_eslint_config(0) then
-						vim.schedule(function()
-							vim.notify("[eslint] No config file found - LSP may not work correctly", vim.log.levels.WARN)
-						end)
-					end
-				end,
 			})
 			vim.lsp.enable("eslint")
 		end,

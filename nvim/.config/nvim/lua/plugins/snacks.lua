@@ -166,7 +166,50 @@ return {
 			{
 				"gd",
 				function()
-					Snacks.picker.lsp_definitions()
+					local params = vim.lsp.util.make_position_params(0, "utf-16")
+					vim.lsp.buf_request_all(0, "textDocument/definition", params, function(results)
+						local locations = {}
+						local offset_encoding = "utf-16"
+
+						for client_id, response in pairs(results or {}) do
+							if response and response.result then
+								local client = vim.lsp.get_client_by_id(client_id)
+								if client and client.offset_encoding then
+									offset_encoding = client.offset_encoding
+								end
+
+								local result = response.result
+								if vim.islist(result) then
+									for _, location in ipairs(result) do
+										table.insert(locations, location)
+									end
+								else
+									table.insert(locations, result)
+								end
+							end
+						end
+
+						if #locations == 0 then
+							return
+						end
+
+						local seen = {}
+						local unique = {}
+						for _, location in ipairs(locations) do
+							local uri = location.uri or location.targetUri
+							local range = location.range or location.targetSelectionRange
+							if uri and range and range.start then
+								local key = string.format("%s:%d:%d", uri, range.start.line, range.start.character)
+								if not seen[key] then
+									seen[key] = true
+									table.insert(unique, location)
+								end
+							end
+						end
+
+						local target = unique[1] or locations[1]
+						vim.lsp.util.show_document(target, offset_encoding, { focus = true })
+					end)
 				end,
 				desc = "Go to Definition",
 			},
