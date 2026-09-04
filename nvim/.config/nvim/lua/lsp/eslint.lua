@@ -1,5 +1,5 @@
 local function get_root_dir(bufnr)
-	local match = vim.fs.root(bufnr, {
+	return vim.fs.root(bufnr, {
 		".eslintrc",
 		".eslintrc.js",
 		".eslintrc.cjs",
@@ -14,10 +14,6 @@ local function get_root_dir(bufnr)
 		"eslint.config.cts",
 		"package.json",
 	})
-	if not match then
-		return nil
-	end
-	return match
 end
 
 local function eslint()
@@ -42,7 +38,12 @@ local function eslint()
 			"typescriptreact",
 			"typescript.tsx",
 		},
-		root_dir = get_root_dir,
+		root_dir = function(bufnr, on_dir)
+			local root = get_root_dir(bufnr)
+			if root then
+				on_dir(root)
+			end
+		end,
 	})
 	vim.lsp.enable("eslint")
 end

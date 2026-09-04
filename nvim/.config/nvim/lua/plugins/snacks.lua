@@ -29,7 +29,7 @@ return {
 			quickfile = { enabled = false },
 			image = { enabled = false },
 			words = { enabled = false },
-			picker = { enabled = false },
+			picker = { enabled = true },
 			scope = { enabled = false },
 
 			-- Dashboard on startup
@@ -166,8 +166,9 @@ return {
 			{
 				"gd",
 				function()
-					local params = vim.lsp.util.make_position_params(0, "utf-16")
-					vim.lsp.buf_request_all(0, "textDocument/definition", params, function(results)
+					vim.lsp.buf_request_all(0, "textDocument/definition", function(client)
+						return vim.lsp.util.make_position_params(0, client.offset_encoding)
+					end, function(results)
 						local locations = {}
 						local offset_encoding = "utf-16"
 

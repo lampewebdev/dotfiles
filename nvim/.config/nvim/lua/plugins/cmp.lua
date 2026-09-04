@@ -13,7 +13,7 @@ return {
 	{
 		"saghen/blink.cmp",
 		dependencies = { "rafamadriz/friendly-snippets", "Kaiser-Yang/blink-cmp-avante" },
-		version = "*",
+		version = "1.*",
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {

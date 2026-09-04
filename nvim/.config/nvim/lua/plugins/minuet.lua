@@ -1,8 +1,5 @@
 return {
   "milanglacier/minuet-ai.nvim",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
 
   config = function()
     require("minuet").setup({
