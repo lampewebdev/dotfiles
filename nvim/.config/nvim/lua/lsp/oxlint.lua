@@ -3,7 +3,7 @@ local function oxlint()
 	local mason_bin = constants.MASON_BIN
 
 	vim.lsp.config("oxlint", {
-		cmd = { mason_bin .. "oxlint", "lsp" },
+		cmd = { mason_bin .. "oxlint", "--lsp" },
 		filetypes = {
 			"javascript",
 			"javascriptreact",

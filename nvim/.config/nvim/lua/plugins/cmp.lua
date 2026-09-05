@@ -12,7 +12,7 @@ return {
 	},
 	{
 		"saghen/blink.cmp",
-		dependencies = { "rafamadriz/friendly-snippets", "Kaiser-Yang/blink-cmp-avante" },
+		dependencies = { "rafamadriz/friendly-snippets" },
 		version = "1.*",
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
@@ -29,20 +29,13 @@ return {
 				nerd_font_variant = "mono",
 			},
 			sources = {
-				default = { "avante", "lazydev", "lsp", "path", "snippets", "buffer" },
+				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
 				providers = {
 					lazydev = {
 						name = "LazyDev",
 						module = "lazydev.integrations.blink",
 						-- make lazydev completions top priority (see `:h blink.cmp`)
 						score_offset = 100,
-					},
-					avante = {
-						module = "blink-cmp-avante",
-						name = "Avante",
-						opts = {
-							-- options for blink-cmp-avante
-						},
 					},
 				},
 			},

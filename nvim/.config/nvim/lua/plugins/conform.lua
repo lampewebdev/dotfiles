@@ -20,7 +20,7 @@ return {
 		opts = function()
 			local constants = require("lsp.constants")
 
-			local function get_js_formatter(bufnr)
+			local function get_web_formatter(bufnr)
 				local buf_name = vim.api.nvim_buf_get_name(bufnr)
 				if buf_name == "" then
 					return { "oxfmt" }
@@ -38,7 +38,7 @@ return {
 			return {
 				format_on_save = {
 					timeout_ms = 500,
-					lsp_format = "first",
+					lsp_format = "fallback",
 				},
 				formatters = {
 					oxfmt = {
@@ -53,14 +53,14 @@ return {
 					},
 				},
 				formatters_by_ft = {
-					javascript = get_js_formatter,
-					javascriptreact = get_js_formatter,
-					typescript = get_js_formatter,
-					typescriptreact = get_js_formatter,
-					json = get_js_formatter,
-					jsonc = get_js_formatter,
-					html = { "oxfmt", "biome" },
-					htmlangular = { "oxfmt", "biome" },
+					javascript = get_web_formatter,
+					javascriptreact = get_web_formatter,
+					typescript = get_web_formatter,
+					typescriptreact = get_web_formatter,
+					json = get_web_formatter,
+					jsonc = get_web_formatter,
+					html = get_web_formatter,
+					htmlangular = get_web_formatter,
 					lua = { "stylua" },
 				},
 			}

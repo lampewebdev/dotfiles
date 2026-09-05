@@ -11,9 +11,20 @@ local function vtsls()
 			"typescript",
 			"typescriptreact",
 		},
-		root_markers = {
-			"tsconfig.json",
-		},
+		root_dir = function(bufnr, on_dir)
+			local root_markers = {
+				{ "package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb", "bun.lock" },
+				{ ".git" },
+			}
+			local deno_root = vim.fs.root(bufnr, { "deno.json", "deno.jsonc", "deno.lock" })
+			local project_root = vim.fs.root(bufnr, root_markers)
+
+			if deno_root and (not project_root or #deno_root >= #project_root) then
+				return
+			end
+
+			on_dir(project_root or vim.fn.getcwd())
+		end,
 		settings = shared.typescript_settings,
 	})
 	vim.lsp.enable("vtsls")

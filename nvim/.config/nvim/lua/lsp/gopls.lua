@@ -11,6 +11,7 @@ local function gopls()
 			"gowork",
 		},
 		root_markers = {
+			"go.work",
 			"go.mod",
 		},
 		settings = shared.gopls_settings,
