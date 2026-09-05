@@ -1,19 +1,13 @@
 -- LSP servers registered eagerly per-language via lsp/*.lua modules
 require("lsp.vtsls")()
 require("lsp.gopls")()
-require("lsp.eslint")()
+require("lsp.golangci_lint")()
 require("lsp.luals")()
 require("lsp.html")()
 require("lsp.jsonls")()
-require("lsp.tailwind")()
 require("lsp.biome")()
-require("lsp.prettierd")()
-require("lsp.htmx")()
-require("lsp.zls")()
-require("lsp.odin")()
-require("lsp.templ")()
-require("lsp.angularls")()
-require("lsp.preact")()
+require("lsp.oxlint")()
+require("lsp.bash")()
 
 -- LSP Keymaps
 local map = function(keys, func, desc)

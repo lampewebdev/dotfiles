@@ -129,6 +129,7 @@ M.gopls_settings = {
 	gopls = {
 		completeUnimported = true,
 		usePlaceholders = true,
+		staticcheck = true,
 		analyses = {
 			unusedparams = true,
 		},

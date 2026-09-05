@@ -19,17 +19,28 @@ return {
 		---@type conform.setupOpts
 		opts = function()
 			local constants = require("lsp.constants")
+
+			local function get_js_formatter(bufnr)
+				local buf_name = vim.api.nvim_buf_get_name(bufnr)
+				if buf_name == "" then
+					return { "oxfmt" }
+				end
+
+				local dir = vim.fs.dirname(buf_name)
+
+				if vim.fs.find({ "biome.json", "biome.jsonc" }, { upward = true, path = dir, stop = vim.env.HOME })[1] then
+					return { "biome" }
+				end
+
+				return { "oxfmt" }
+			end
+
 			return {
 				format_on_save = {
 					timeout_ms = 500,
 					lsp_format = "first",
 				},
 				formatters = {
-					odinfmt = {
-						command = "odinfmt",
-						args = { "-stdin" },
-						stdin = true,
-					},
 					oxfmt = {
 						command = constants.MASON_BIN .. "oxfmt",
 						args = { "--stdin-filepath", "$FILENAME" },
@@ -42,18 +53,15 @@ return {
 					},
 				},
 				formatters_by_ft = {
-					javascript = { "oxfmt", "biome" },
-					javascriptreact = { "oxfmt", "biome" },
-					typescript = { "oxfmt", "biome" },
-					typescriptreact = { "oxfmt", "biome" },
-					json = { "oxfmt", "biome" },
-					jsonc = { "oxfmt", "biome" },
+					javascript = get_js_formatter,
+					javascriptreact = get_js_formatter,
+					typescript = get_js_formatter,
+					typescriptreact = get_js_formatter,
+					json = get_js_formatter,
+					jsonc = get_js_formatter,
 					html = { "oxfmt", "biome" },
 					htmlangular = { "oxfmt", "biome" },
 					lua = { "stylua" },
-					templ = { "templ", "html", "htmx" },
-					zig = { "zigfmt" },
-					odin = { "odinfmt" },
 				},
 			}
 		end,

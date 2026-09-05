@@ -9,7 +9,6 @@ local function gopls()
 			"go",
 			"gomod",
 			"gowork",
-			"gotmpl",
 		},
 		root_markers = {
 			"go.mod",

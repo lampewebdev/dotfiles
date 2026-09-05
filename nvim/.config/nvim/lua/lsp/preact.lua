@@ -27,10 +27,8 @@ local function preact()
 		filetypes = {
 			"javascript",
 			"javascriptreact",
-			"javascript.jsx",
 			"typescript",
 			"typescriptreact",
-			"typescript.tsx",
 			"preact",
 		},
 		root_markers = {
