@@ -101,3 +101,6 @@ export PATH="/Users/michael/flutter/bin:$PATH"
 
 # Vite+ bin (https://viteplus.dev)
 . "$HOME/.config/vite-plus/env"
+
+# Machine-local settings that stay out of the repo (zsh/.zshrc.local, gitignored).
+[[ -r "${${(%):-%x}:A:h}/.zshrc.local" ]] && source "${${(%):-%x}:A:h}/.zshrc.local"
