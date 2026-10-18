@@ -1,11 +1,13 @@
 return {
+	-- Code Villain, from the vault: apps/theme/nvim. A dark background is
+	-- night, a light one day. Was folke/tokyonight.nvim (tokyonight-night).
 	{
-		"folke/tokyonight.nvim",
-		lazy = true,
+		dir = "~/code/villain/villain-vault/apps/theme/nvim",
+		name = "code-villain",
+		lazy = false,
 		priority = 1000,
-		event = "VimEnter",
 		config = function()
-			vim.cmd.colorscheme("tokyonight-night")
+			vim.cmd.colorscheme("code-villain")
 		end,
 	},
 }

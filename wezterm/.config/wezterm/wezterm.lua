@@ -13,11 +13,14 @@ config.window_padding = {
 	bottom = 0,
 }
 
-config.color_scheme = "GruvboxDarkHard"
-config.color_scheme = 'aikofog (terminal.sexy)'
-config.color_scheme = "Tokyo Night Moon"
--- config.color_scheme = "Tokyo Night Storm"
--- config.color_scheme = "tokyonight"
+-- Code Villain, from the vault (apps/theme/wezterm): night when macOS is
+-- dark, day when it is light. WezTerm re-reads this when the appearance
+-- changes. Was "Tokyo Night Moon".
+config.color_scheme_dirs = { wezterm.home_dir .. "/code/villain/villain-vault/apps/theme/wezterm" }
+local function scheme_for(appearance)
+	return appearance:find("Dark") and "Code Villain Night" or "Code Villain Day"
+end
+config.color_scheme = scheme_for(wezterm.gui and wezterm.gui.get_appearance() or "Dark")
 config.font_size = 14.5
 config.font = wezterm.font({
 	family = "0xProto",
@@ -125,7 +128,9 @@ end
 -- tmux status
 wezterm.on("update-right-status", function(window, _)
 	local SOLID_LEFT_ARROW = ""
-	local ARROW_FOREGROUND = { Foreground = { Color = "#000" } }
+	-- The tab bar's own colour, from the active scheme.
+	local bar = window:effective_config().resolved_palette.tab_bar.background
+	local ARROW_FOREGROUND = { Foreground = { Color = bar } }
 	local prefix = ""
 
 	if window:leader_is_active() then
@@ -133,12 +138,8 @@ wezterm.on("update-right-status", function(window, _)
 		SOLID_LEFT_ARROW = utf8.char(0xe0b2)
 	end
 
-	if window:active_tab():tab_id() ~= 0 then
-		ARROW_FOREGROUND = { Foreground = { Color = "#1e2030" } }
-	end -- arrow color based on if tab is first pane
-
 	window:set_left_status(wezterm.format({
-		{ Background = { Color = "#000" } },
+		{ Background = { Color = bar } },
 		{ Text = prefix },
 		ARROW_FOREGROUND,
 		{ Text = SOLID_LEFT_ARROW },

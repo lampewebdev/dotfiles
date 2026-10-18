@@ -55,7 +55,9 @@ unset _pnpm_node
 # zoxide
 eval "$(zoxide init zsh)"
 
-# starship
+# starship: zephyr picks the theme after this file runs. Code Villain, from
+# the vault (apps/theme/starship), in the terminal's own colours.
+zstyle ':zephyr:plugin:prompt' theme starship code-villain
 eval "$(starship init zsh)"
 
 # history substring search
