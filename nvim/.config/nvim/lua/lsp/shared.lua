@@ -8,7 +8,10 @@ end
 
 -- Common capabilities
 function M.make_client_capabilities()
-	return vim.lsp.protocol.make_client_capabilities()
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	capabilities.general = capabilities.general or {}
+	capabilities.general.positionEncodings = { "utf-16" }
+	return capabilities
 end
 
 -- Common Lua LSP settings

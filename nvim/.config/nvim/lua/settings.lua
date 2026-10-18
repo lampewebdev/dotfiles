@@ -21,6 +21,9 @@ vim.opt.number = true
 
 vim.opt.undofile = true
 
+-- Let Neovim's filesystem watchers reload files changed by external tools.
+vim.o.autoread = true
+
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 500
 

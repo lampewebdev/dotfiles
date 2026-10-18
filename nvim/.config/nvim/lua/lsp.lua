@@ -1,4 +1,8 @@
 -- LSP servers registered eagerly per-language via lsp/*.lua modules
+vim.lsp.config("*", {
+	capabilities = require("lsp.shared").make_client_capabilities(),
+})
+
 require("lsp.vtsls")()
 require("lsp.gopls")()
 require("lsp.golangci_lint")()
