@@ -89,3 +89,15 @@ export PATH="$PATH:/Users/michael/.lmstudio/bin"
 
 # Added by Antigravity CLI installer
 export PATH="/Users/michael/.local/bin:$PATH"
+
+# Added by cua-driver-rs installer — see https://github.com/trycua/cua
+export PATH="/Users/michael/.local/bin:$PATH"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+
+export PATH="/Users/michael/flutter/bin:$PATH"
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.config/vite-plus/env"
