@@ -13,10 +13,10 @@ config.window_padding = {
 	bottom = 0,
 }
 
--- Code Villain, from the vault (apps/theme/wezterm): night when macOS is
+-- Code Villain, from the vault (code/apps/theme/wezterm): night when macOS is
 -- dark, day when it is light. WezTerm re-reads this when the appearance
 -- changes. Was "Tokyo Night Moon".
-config.color_scheme_dirs = { wezterm.home_dir .. "/code/villain/villain-vault/apps/theme/wezterm" }
+config.color_scheme_dirs = { wezterm.home_dir .. "/code/villain/villain-vault/code/apps/theme/wezterm" }
 local function scheme_for(appearance)
 	return appearance:find("Dark") and "Code Villain Night" or "Code Villain Day"
 end
