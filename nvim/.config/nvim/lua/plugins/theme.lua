@@ -1,8 +1,8 @@
 return {
-	-- Code Villain, from the vault: apps/theme/nvim. A dark background is
+	-- Code Villain, from the vault: code/apps/theme/nvim. A dark background is
 	-- night, a light one day. Was folke/tokyonight.nvim (tokyonight-night).
 	{
-		dir = "~/code/villain/villain-vault/apps/theme/nvim",
+		dir = "~/code/villain/villain-vault/code/apps/theme/nvim",
 		name = "code-villain",
 		lazy = false,
 		priority = 1000,
